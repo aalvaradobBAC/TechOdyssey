@@ -1,0 +1,22 @@
+id: M02
+technology: rpg
+title: "Anatomía de un programa Free RPG"
+version: 1.0.0
+status: completed
+order: 2
+
+prerequisites: [M01]
+
+estimated_hours:
+  theory: 0
+  demonstrations: 0
+  guided_labs: 0
+  practices: 0
+  challenges: 0
+
+completion:
+  conceptual_score: 80
+  required_units: 4
+  required_labs: 4
+  required_challenges: 4
+  boss_fight: false

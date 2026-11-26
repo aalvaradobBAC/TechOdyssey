@@ -1,0 +1,255 @@
+{
+  "module": {
+    "id": "M03",
+    "technology": "rpg",
+    "title": "Variables, constantes y tipos",
+    "subtitle": "Unidad 3: Precisión financiera.",
+    "version": "1.0.0",
+    "estimatedMinutes": 25,
+    "minimumScore": 80,
+    "completionBadge": "Guardián de Tipos",
+    "mission": {
+      "title": "El Guardián de los Datos",
+      "scenario": "El contrato financiero requiere distinguir cantidades enteras, importes decimales, rangos permitidos y valores con signo."
+    }
+  },
+  "sections": [
+    {
+      "id": "M03-U03",
+      "order": 3,
+      "title": "Precisión financiera",
+      "estimatedMinutes": 25,
+      "type": "mission-unit",
+      "introduction": "En esta unidad elegirás tipos numéricos según el significado, el rango, el signo y los decimales que el dato necesita. Trabajaremos con declaraciones: todavía no haremos operaciones ni conversiones.",
+      "topics": [
+        {
+          "title": "Primero, define el contrato numérico",
+          "content": [
+            "Antes de elegir un tipo, pregunta si el dato representa una cantidad entera o un valor con decimales; qué valores mínimos y máximos debe admitir; si puede ser negativo; y cuántas posiciones decimales necesita.",
+            "Un contador suele ser entero. Un importe puede requerir decimales y quizá admitir valores negativos, por ejemplo, si representa un saldo o ajuste.",
+            "No elijas un tipo solo por su nombre ni porque parezca más eficiente. La decisión debe cumplir el contrato del dato y cualquier formato exigido por el sistema que lo recibe."
+          ]
+        },
+        {
+          "title": "Enteros con signo y sin signo",
+          "content": [
+            "INT(digits) representa un entero con signo: admite valores negativos y positivos, pero no posiciones decimales. RPG admite los parámetros 3, 5, 10 y 20.",
+            "UNS(digits) representa un entero sin signo. IBM recomienda usarlo solo cuando se esperan valores no negativos. También admite los parámetros 3, 5, 10 y 20.",
+            "El parámetro no siempre equivale al máximo valor decimal. Por ejemplo, INT(5) admite de -32768 a 32767 y UNS(5) de 0 a 65535. Confirma el rango que necesita el contrato."
+          ],
+          "codeCaption": "Un contador admite incrementos y correcciones con signo",
+          "code": "dcl-s variacionIntentos int(10) inz(0);",
+          "items": [
+            {
+              "code": "INT(5)",
+              "name": "Entero con signo",
+              "purpose": "Rango IBM: -32768 a 32767; no tiene posiciones decimales."
+            },
+            {
+              "code": "UNS(5)",
+              "name": "Entero sin signo",
+              "purpose": "Rango IBM: 0 a 65535; úsalo solo si el contrato no admite negativos."
+            }
+          ]
+        },
+        {
+          "title": "Precisión y escala",
+          "content": [
+            "En una declaración decimal como PACKED(13:2), el primer número indica 13 dígitos en total y el segundo reserva 2 posiciones decimales.",
+            "Por tanto, el ejemplo permite hasta 11 dígitos antes del separador decimal y 2 después. El signo no se cuenta como uno de esos dígitos.",
+            "Ajusta ambos valores al contrato del dato. Si eliges una escala sin suficientes posiciones decimales, puedes perder la precisión que el negocio necesita."
+          ],
+          "codeCaption": "Importe con dos posiciones decimales",
+          "code": "dcl-s saldoDisponible packed(13:2) inz(0);"
+        },
+        {
+          "title": "PACKED, ZONED y BINDEC",
+          "content": [
+            "PACKED(digits:decimals) y ZONED(digits:decimals) son formatos numéricos decimales distintos. Ambos expresan precisión y escala; no los presentes como nombres intercambiables.",
+            "BINDEC(digits:decimals) es el formato binario-decimal de RPG. Puede declarar posiciones decimales, pero su rango está limitado por la representación binaria; no lo confundas con INT, que siempre tiene cero posiciones decimales y permite el rango completo de su formato entero.",
+            "Para esta unidad basta reconocer la sintaxis y elegir según el contrato. Los detalles de representación y conversión quedan fuera de alcance."
+          ],
+          "codeCaption": "Tres tipos decimales reconocidos por RPG",
+          "code": "dcl-s importeContable packed(13:2);\ndcl-s importeInterfaz zoned(13:2);\ndcl-s factorDecimal bindec(9:2);"
+        },
+        {
+          "title": "Errores comunes al elegir",
+          "items": [
+            {
+              "code": "UNS",
+              "name": "No significa automáticamente mejor",
+              "purpose": "Solo corresponde si el dato nunca puede ser negativo y su rango cubre el contrato."
+            },
+            {
+              "code": "INT",
+              "name": "No conserva fracciones",
+              "purpose": "Es un tipo entero; no lo uses para importes que requieren posiciones decimales."
+            },
+            {
+              "code": "PACKED(13:2)",
+              "name": "Precisión y escala",
+              "purpose": "Declara trece dígitos totales y dos posiciones decimales, no trece antes del separador más dos después."
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "title": "Describe el rango",
+          "description": "Anota si el valor puede ser negativo, qué límites debe admitir y si contiene fracciones."
+        },
+        {
+          "title": "Selecciona la familia",
+          "description": "Distingue un entero de un decimal; usa UNS solo cuando el contrato excluya negativos."
+        },
+        {
+          "title": "Comprueba precisión y escala",
+          "description": "Lee el total de dígitos y las posiciones decimales para comprobar que se ajustan al dato."
+        }
+      ],
+      "challenge": {
+        "title": "Desafío: el contrato numérico",
+        "instruction": "Escribe una declaración completa para cada caso. Decide el tipo a partir del signo, el rango y los decimales requeridos; conserva exactamente el nombre y la precisión indicados.",
+        "deliverables": [
+          "Declarar saldoDisponible como importe que puede ser negativo y requiere dos decimales.",
+          "Declarar variacionIntentos como entero con signo de tamaño 10.",
+          "Declarar registrosProcesados como entero no negativo que debe llegar al menos a 50000."
+        ],
+        "successCriteria": [
+          "Usé PACKED(13:2) para el importe con dos posiciones decimales.",
+          "Usé INT(10) para el valor entero que puede tener signo.",
+          "Usé UNS(5) para el contador no negativo con rango suficiente para 50000."
+        ],
+        "freeText": {
+          "prompt": "Resuelve cada contrato en su propia entrada. Escribe la declaración RPG completa y respeta el tipo, tamaño, escala y nombre requeridos.",
+          "lines": [
+            {
+              "prompt": "Saldo: admite valores negativos y tiene dos posiciones decimales",
+              "originalText": "dcl-s saldoDisponible int(10);",
+              "placeholder": "Declara saldoDisponible como decimal de 13 dígitos y 2 decimales",
+              "requiredPattern": "dcl-s saldoDisponible packed(13:2);",
+              "forbiddenPatterns": [
+                "dcl-s saldoDisponible int(10);",
+                "dcl-s saldoDisponible packed(13:0);"
+              ]
+            },
+            {
+              "prompt": "Variación de intentos: entero con signo",
+              "originalText": "dcl-s variacionIntentos uns(10);",
+              "placeholder": "Declara variacionIntentos como entero con signo de tamaño 10",
+              "requiredPattern": "dcl-s variacionIntentos int(10);",
+              "forbiddenPatterns": [
+                "dcl-s variacionIntentos uns(10);"
+              ]
+            },
+            {
+              "prompt": "Registros procesados: nunca es negativo y puede llegar a 50000",
+              "originalText": "dcl-s registrosProcesados int(5);",
+              "placeholder": "Declara registrosProcesados como entero sin signo de tamaño 5",
+              "requiredPattern": "dcl-s registrosProcesados uns(5);",
+              "forbiddenPatterns": [
+                "dcl-s registrosProcesados int(5);"
+              ]
+            }
+          ]
+        },
+        "solution": {
+          "caption": "Solución de referencia: cada declaración refleja el rango y la precisión",
+          "code": "dcl-s saldoDisponible packed(13:2);\ndcl-s variacionIntentos int(10);\ndcl-s registrosProcesados uns(5);"
+        }
+      },
+      "knowledgeCheck": {
+        "questions": [
+          {
+            "question": "¿Qué diferencia clave hay entre INT(5) y UNS(5)?",
+            "options": [
+              "INT(5) admite negativos; UNS(5) no, y sus rangos son distintos.",
+              "UNS(5) admite dos decimales; INT(5) ninguno.",
+              "INT(5) siempre admite más valores positivos que UNS(5).",
+              "No hay diferencia; ambos nombres son sinónimos."
+            ],
+            "correctOption": 0,
+            "explanation": "INT es entero con signo; UNS es entero sin signo. IBM documenta para estos tamaños los rangos -32768 a 32767 y 0 a 65535, respectivamente.",
+            "hint": "Observa si el contrato necesita representar valores negativos.",
+            "code": "dcl-s ajuste int(5);\ndcl-s registros uns(5);"
+          },
+          {
+            "question": "En PACKED(13:2), ¿qué indican los valores 13 y 2?",
+            "options": [
+              "Trece dígitos en total, con dos posiciones decimales.",
+              "Trece dígitos antes y dos después del separador decimal.",
+              "Trece bytes y dos variables.",
+              "Trece decimales y dos valores posibles."
+            ],
+            "correctOption": 0,
+            "explanation": "El primer parámetro expresa los dígitos totales y el segundo las posiciones decimales. En este ejemplo quedan once dígitos antes del separador.",
+            "hint": "La escala está incluida dentro del total de dígitos.",
+            "code": "dcl-s saldoDisponible packed(13:2);"
+          },
+          {
+            "question": "Un dato debe representar importes con dos decimales y puede ser negativo. ¿Cuál declaración satisface ese contrato?",
+            "options": [
+              "dcl-s saldoDisponible packed(13:2);",
+              "dcl-s saldoDisponible int(10);",
+              "dcl-s saldoDisponible uns(10);",
+              "dcl-s saldoDisponible ind;"
+            ],
+            "correctOption": 0,
+            "explanation": "PACKED(13:2) declara un decimal con dos posiciones decimales y permite representar valores con signo.",
+            "hint": "El tipo debe conservar tanto los decimales como los valores negativos.",
+            "code": "dcl-s saldoDisponible packed(13:2);"
+          },
+          {
+            "question": "¿Cuál afirmación sobre BINDEC es correcta?",
+            "options": [
+              "Es un formato binario-decimal de RPG que puede declarar posiciones decimales y tiene un rango limitado.",
+              "Es otro nombre para un entero con signo de rango completo.",
+              "Solo sirve para valores de texto sin longitud.",
+              "No permite indicar posiciones decimales."
+            ],
+            "correctOption": 0,
+            "explanation": "IBM describe BINDEC como formato binario-decimal que puede tener posiciones decimales y un rango limitado; INT tiene siempre cero posiciones decimales.",
+            "hint": "No confundas el nombre binario-decimal con el tipo entero INT.",
+            "code": "dcl-s factorDecimal bindec(9:2);"
+          },
+          {
+            "question": "¿Qué es importante al decidir entre PACKED y ZONED?",
+            "options": [
+              "Son formatos decimales distintos; verifica cuál requiere el contrato del sistema.",
+              "ZONED es siempre obligatorio para cualquier importe.",
+              "PACKED no admite valores negativos.",
+              "Ambos son siempre equivalentes en representación."
+            ],
+            "correctOption": 0,
+            "explanation": "IBM documenta PACKED y ZONED como formatos numéricos distintos. La elección debe respetar el contrato y el formato requerido.",
+            "hint": "Distingue que ambos pueden expresar decimales sin afirmar que sean idénticos.",
+            "code": "dcl-s importeContable packed(13:2);\ndcl-s importeInterfaz zoned(13:2);"
+          }
+        ]
+      },
+      "mission": {
+        "title": "Misión secundaria: detectar pérdida de precisión",
+        "scenario": "Revisa un contrato de saldo y explica por qué un entero sin decimales no conserva importes fraccionarios.",
+        "deliverables": [
+          "Comparar INT(10) con PACKED(13:2) para el saldo.",
+          "Explicar la diferencia entre precisión y escala.",
+          "Verificar que el rango de registrosProcesados incluye el máximo del contrato."
+        ],
+        "scoring": [
+          {
+            "criterion": "Elección según signo y rango",
+            "weight": 40
+          },
+          {
+            "criterion": "Precisión y escala justificadas",
+            "weight": 40
+          },
+          {
+            "criterion": "Diferencia entre formatos decimales",
+            "weight": 20
+          }
+        ]
+      }
+    }
+  ]
+}

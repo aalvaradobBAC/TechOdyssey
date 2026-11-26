@@ -1,0 +1,273 @@
+{
+  "module": {
+    "id": "M03",
+    "technology": "rpg",
+    "title": "Variables, constantes y tipos",
+    "subtitle": "Unidad 1: El contrato de una variable.",
+    "version": "1.0.0",
+    "estimatedMinutes": 15,
+    "minimumScore": 80,
+    "completionBadge": "Guardián de Tipos",
+    "mission": {
+      "title": "El Guardián de los Datos",
+      "scenario": "Antes de calcular o consultar, una aplicación debe representar sus datos con nombres, tipos, tamaños e inicialización adecuados."
+    }
+  },
+  "sections": [
+    {
+      "id": "M03-U01",
+      "order": 1,
+      "title": "El contrato de una variable",
+      "estimatedMinutes": 15,
+      "type": "mission-unit",
+      "introduction": "Una variable representa un dato que puede cambiar durante la ejecución. Esta unidad aprende a declarar una variable independiente con DCL-S, elegir un nombre significativo y establecer su valor inicial.",
+      "topics": [
+        {
+          "title": "¿Qué es una variable?",
+          "content": [
+            "Una variable es un dato identificado por un nombre que puede cambiar su valor mientras el programa se ejecuta.",
+            "Antes de usar una variable conviene responder cinco preguntas: ¿qué representa?, ¿cómo se llama?, ¿qué tipo tiene?, ¿cuánto puede almacenar? y ¿con qué valor comienza?",
+            "En RPG totalmente libre, una declaración independiente utiliza DCL-S y termina con punto y coma.",
+            "Las reglas de nombres descriptivos y de formato son estándares de TechOdyssey. Son recomendaciones educativas, no una afirmación de que otros nombres sean ilegales."
+          ]
+        },
+        {
+          "title": "Anatomía de DCL-S",
+          "content": [
+            "Una variable independiente contiene un dato propio del programa. Su declaración describe nombre, tipo y, opcionalmente, valor inicial.",
+            "En una declaración con DCL-S, el tipo de datos, si se especifica, debe aparecer antes de las demás palabras clave.",
+            "INZ establece el valor inicial al crear la variable. Una asignación posterior como nombreCliente = 'Ana'; es una instrucción ejecutable distinta."
+          ],
+          "codeCaption": "Ejemplo: nombre de cliente",
+          "code": "dcl-s nombreCliente varchar(60) inz('');"
+        },
+        {
+          "title": "Las cinco respuestas del contrato",
+          "content": [
+            "Lee el ejemplo completo como una sola ficha: cada elemento responde una pregunta del contrato del dato."
+          ],
+          "codeCaption": "Contrato visible de nombreCliente",
+          "code": "dcl-s nombreCliente varchar(60) inz('');",
+          "items": [
+            {
+              "code": "¿Qué representa?",
+              "name": "Un dato de texto",
+              "purpose": "nombreCliente representa el nombre de una persona."
+            },
+            {
+              "code": "¿Cómo se llama?",
+              "name": "nombreCliente",
+              "purpose": "Es el identificador que usará el programa para referirse al dato."
+            },
+            {
+              "code": "¿Qué tipo tiene?",
+              "name": "VARCHAR",
+              "purpose": "Es texto cuya longitud real puede cambiar durante el uso."
+            },
+            {
+              "code": "¿Cuánto puede almacenar?",
+              "name": "Hasta 60 caracteres",
+              "purpose": "La longitud máxima se declara con VARCHAR(60)."
+            },
+            {
+              "code": "¿Con qué valor comienza?",
+              "name": "Una cadena vacía",
+              "purpose": "INZ('') establece el valor inicial al crear la variable."
+            }
+          ]
+        },
+        {
+          "title": "Lectura guiada",
+          "items": [
+            {
+              "code": "DCL-S",
+              "name": "Operación de declaración",
+              "purpose": "Declara una variable independiente."
+            },
+            {
+              "code": "nombreCliente",
+              "name": "Nombre",
+              "purpose": "Identifica el dato con un nombre significativo."
+            },
+            {
+              "code": "VARCHAR(60)",
+              "name": "Tipo y longitud",
+              "purpose": "Permite texto de hasta 60 caracteres; su longitud real puede variar."
+            },
+            {
+              "code": "INZ('')",
+              "name": "Inicialización",
+              "purpose": "Inicia el dato con una cadena vacía."
+            },
+            {
+              "code": ";",
+              "name": "Terminator",
+              "purpose": "Marca el final de la declaración en RPG totalmente libre."
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "title": "Identifica el dato",
+          "description": "Lee el propósito del dato antes de escribir el nombre o elegir el tipo."
+        },
+        {
+          "title": "Construye la declaración",
+          "description": "Escribe DCL-S, el nombre, el tipo y las palabras clave necesarias."
+        },
+        {
+          "title": "Explica el valor inicial",
+          "description": "Justifica por qué INZ es útil o por qué no aporta información en esa variable."
+        }
+      ],
+      "challenge": {
+        "title": "Desafío: ensamblador de declaraciones",
+        "instruction": "Ordena los bloques para construir una declaración válida y luego reemplaza nombres débiles por nombres que expresen significado.",
+        "deliverables": [
+          "La declaración dcl-s cantidadIntentos int(10) inz(0);",
+          "Una sustitución significativa para las variables a, b y c.",
+          "Tres declaraciones corregidas escritas en el área de texto.",
+          "Una explicación breve de INZ frente a una asignación posterior."
+        ],
+        "successCriteria": [
+          "Ordené DCL-S, nombre, tipo, inicialización y punto y coma.",
+          "Usé nombres que describen el dato.",
+          "Diferencio inicialización declarativa de asignación ejecutable."
+        ],
+        "ordering": {
+          "prompt": "Ordena los bloques para declarar el contador de intentos.",
+          "blocks": [
+            "INT(10)",
+            "INZ(0)",
+            ";",
+            "cantidadIntentos",
+            "DCL-S"
+          ],
+          "correctOrder": [
+            "DCL-S",
+            "cantidadIntentos",
+            "INT(10)",
+            "INZ(0)",
+            ";"
+          ]
+        },
+        "freeText": {
+          "prompt": "Resuelve una declaración a la vez. Cada reto exige conservar el significado del dato y escribir una línea DCL-S válida con nombre, tipo, inicialización cuando corresponda y punto y coma.",
+          "lines": [
+            {
+              "prompt": "Identificador que puede comenzar con ceros",
+              "originalText": "dcl-s cuenta packed(12:0);",
+              "placeholder": "Escribe una declaración CHAR para el número de cuenta",
+              "requiredPattern": "dcl-s numeroCuenta char(12);",
+              "forbiddenPatterns": [
+                "dcl-s cuenta packed(12:0);"
+              ]
+            },
+            {
+              "prompt": "Texto cuyo tamaño real puede variar",
+              "originalText": "dcl-s cliente char(5);",
+              "placeholder": "Escribe una declaración VARCHAR para el nombre",
+              "requiredPattern": "dcl-s nombreCliente varchar(60) inz('');",
+              "forbiddenPatterns": [
+                "dcl-s cliente char(5);"
+              ]
+            },
+            {
+              "prompt": "Contador entero que comienza en cero",
+              "originalText": "dcl-s intentos packed(2:0);",
+              "placeholder": "Escribe una declaración INT e inicialízala",
+              "requiredPattern": "dcl-s cantidadIntentos int(10) inz(0);",
+              "forbiddenPatterns": [
+                "dcl-s intentos packed(2:0);"
+              ]
+            }
+          ]
+        },
+        "solution": {
+          "caption": "Solución de referencia: declara datos independientes y descriptivos",
+          "code": "dcl-s numeroCuenta char(12);\ndcl-s saldoDisponible packed(13:2) inz(0);\ndcl-s cuentaActiva ind inz(*off);\n\ndcl-s cantidadIntentos int(10) inz(0);\n\ncantidadIntentos = 1;"
+        }
+      },
+      "knowledgeCheck": {
+        "questions": [
+          {
+            "question": "¿Qué elemento establece el valor inicial de una variable en su declaración?",
+            "options": [
+              "DCL-S",
+              "INZ(0)",
+              "El punto y coma",
+              "El nombre de la variable"
+            ],
+            "correctOption": 1,
+            "explanation": "INZ establece el valor inicial al crear la variable. DCL-S declara la variable y el punto y coma termina la declaración.",
+            "hint": "Busca la palabra clave que entrega un valor inicial al dato.",
+            "code": "dcl-s cantidadIntentos int(10) inz(0);"
+          },
+          {
+            "question": "¿Para qué se usa DCL-S en una declaración RPG totalmente libre?",
+            "options": [
+              "Para declarar un campo independiente.",
+              "Para asignar un nuevo valor durante la ejecución.",
+              "Para terminar el procedimiento principal.",
+              "Para compilar el fuente."
+            ],
+            "correctOption": 0,
+            "explanation": "DCL-S declara un campo independiente. La asignación posterior es una instrucción distinta.",
+            "hint": "Distingue una declaración de una instrucción que cambia un valor.",
+            "code": "dcl-s cantidadIntentos int(10);"
+          },
+          {
+            "question": "¿Cuál afirmación diferencia correctamente INZ de una asignación?",
+            "options": [
+              "INZ establece el valor inicial en la declaración; una asignación cambia el valor mediante una instrucción.",
+              "INZ declara el nombre; la asignación elige el tipo.",
+              "Ambas son palabras clave obligatorias en cada variable.",
+              "Una asignación solo puede aparecer antes de DCL-S."
+            ],
+            "correctOption": 0,
+            "explanation": "INZ forma parte de la declaración. Una asignación como cantidadIntentos = 1; es una instrucción ejecutable posterior.",
+            "hint": "Compara en qué parte del fuente aparece cada una.",
+            "code": "dcl-s cantidadIntentos int(10) inz(0);\ncantidadIntentos = 1;"
+          },
+          {
+            "question": "¿Qué propiedad debe tener el nombre de una variable para que otra persona entienda mejor qué dato representa?",
+            "options": [
+              "Describir el significado del dato, como cantidadIntentos.",
+              "Ser siempre una sola letra.",
+              "Incluir el tipo de dato completo.",
+              "Usar exclusivamente mayúsculas."
+            ],
+            "correctOption": 0,
+            "explanation": "Los nombres descriptivos son una buena práctica de legibilidad. La convención concreta puede variar por equipo.",
+            "hint": "Elige el nombre que explica el propósito, no una regla de estilo inventada.",
+            "code": "dcl-s cantidadIntentos int(10) inz(0);"
+          }
+        ]
+      },
+      "mission": {
+        "title": "Misiones secundarias",
+        "scenario": "Completa una práctica de nombres y explica una asignación posterior.",
+        "deliverables": [
+          "Renombrar a, b y c con nombres significativos.",
+          "Explicar por qué INZ(0) no es lo mismo que una asignación posterior.",
+          "Comparar tu fuente con la solución de referencia."
+        ],
+        "scoring": [
+          {
+            "criterion": "Nombre significativo",
+            "weight": 40
+          },
+          {
+            "criterion": "Declaración correcta",
+            "weight": 40
+          },
+          {
+            "criterion": "Explicación de INZ",
+            "weight": 20
+          }
+        ]
+      }
+    }
+  ]
+}

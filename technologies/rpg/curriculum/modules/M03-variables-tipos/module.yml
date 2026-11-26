@@ -1,0 +1,47 @@
+id: M03
+technology: rpg
+title: "Variables, constantes y tipos"
+version: 1.0.0
+status: designed
+order: 3
+
+prerequisites: [M02]
+
+estimated_hours:
+  theory: 1.0
+  demonstrations: 0.5
+  guided_labs: 1.0
+  practices: 0.25
+  challenges: 0.25
+
+completion:
+  conceptual_score: 80
+  required_units: 7
+  required_labs: 1
+  required_challenges: 3
+  boss_fight: false
+  badge: rpg-type-guardian
+  xp: 100
+  xp_policy: once
+
+units:
+  - id: M03-U01
+    title: "El contrato de una variable"
+    status: implemented
+  - id: M03-U02
+    title: "Identidad textual"
+    status: implemented
+  - id: M03-U03
+    title: "Precisión financiera"
+  - id: M03-U04
+    title: "Estado y control"
+  - id: M03-U05
+    title: "Tiempo del sistema"
+  - id: M03-U06
+    title: "Reglas que no cambian"
+  - id: M03-U07
+    title: "Laboratorio integrador"
+
+runtime:
+  ibmi_required: false
+  ibmi_compilation_optional: true

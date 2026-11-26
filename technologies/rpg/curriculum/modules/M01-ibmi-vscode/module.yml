@@ -1,0 +1,22 @@
+id: M01
+technology: rpg
+title: "IBM i y Visual Studio Code"
+version: 0.1.0
+status: completed
+order: 1
+
+prerequisites: [M00]
+
+estimated_hours:
+  theory: 0.5
+  demonstrations: 0.5
+  guided_labs: 1.0
+  practices: 0.5
+  challenges: 0.5
+
+completion:
+  conceptual_score: 80
+  required_units: 7
+  required_labs: 3
+  required_challenges: 1
+  boss_fight: false

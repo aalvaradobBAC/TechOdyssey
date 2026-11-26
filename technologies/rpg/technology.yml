@@ -1,0 +1,22 @@
+id: rpg
+name: RPG
+display_name: IBM i y RPG
+version: 0.1.0
+status: active
+order: 1
+
+description: >
+  Ruta formativa para IBM i, Visual Studio Code, RPG Free,
+  Db2 for i, ILE, Git y modernización de aplicaciones.
+
+entry_module: M00
+
+completion:
+  minimum_score: 80
+  capstone_required: true
+
+runtime:
+  type: ibmi
+  enabled: false
+  isolation: library-per-session
+  library_prefix: TRN_

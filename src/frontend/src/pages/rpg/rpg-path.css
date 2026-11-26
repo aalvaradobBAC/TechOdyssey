@@ -1,0 +1,677 @@
+.pathPage,
+.diagnosticPage {
+  min-height: 100vh;
+  color: #132238;
+  background: #f4f7fb;
+}
+
+.pathHeader {
+  color: #fff;
+  background: linear-gradient(135deg, #071426 0%, #12365d 58%, #17569a 100%);
+}
+
+.pathNavigation {
+  width: min(1120px, calc(100% - 48px));
+  margin: 0 auto;
+  padding: 24px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.gamificationAccount {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.gamificationAccountStatus {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  color: #fff;
+  font-size: 13px;
+}
+
+.accountProfile {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 14px;
+}
+
+.accountProfile > div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 3px;
+}
+
+.gamificationAccountStatus span {
+  color: #bfdbfe;
+}
+
+.accountActionButton,
+.accountSubmitButton,
+.accountModeButton {
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 750;
+}
+
+.accountActionButton {
+  min-height: 38px;
+  padding: 0 14px;
+  color: #fff;
+  background: #2563eb;
+}
+
+.accountActionButton:disabled,
+.accountSubmitButton:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+.accountForm {
+  position: absolute;
+  z-index: 5;
+  top: calc(100% + 10px);
+  right: 0;
+  width: min(340px, calc(100vw - 32px));
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border: 1px solid #d8e1ec;
+  border-radius: 12px;
+  color: #132238;
+  background: #fff;
+  box-shadow: 0 16px 38px rgba(15, 39, 68, 0.2);
+}
+
+.accountForm label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  color: #44566d;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.accountForm input {
+  min-height: 40px;
+  padding: 8px 10px;
+  border: 1px solid #bac8d8;
+  border-radius: 7px;
+  color: #132238;
+  background: #fff;
+  font: inherit;
+}
+
+.accountSubmitButton {
+  min-height: 40px;
+  color: #fff;
+  background: #2563eb;
+}
+
+.accountModeButton {
+  padding: 5px;
+  color: #1d4ed8;
+  background: transparent;
+}
+
+.adminResetControls {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.adminResetForm {
+  top: calc(100% + 6px);
+}
+
+.accountSuccess {
+  margin: 0;
+  color: #166534;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.accountForm small {
+  color: #65758a;
+  line-height: 1.4;
+}
+
+.accountError {
+  color: #b42318 !important;
+  font-size: 13px;
+}
+
+.rewardNotice {
+  width: min(1000px, calc(100% - 48px));
+  margin: 20px auto;
+  padding: 14px 18px;
+  border: 1px solid #86efac;
+  border-radius: 10px;
+  color: #166534;
+  background: #f0fdf4;
+  line-height: 1.5;
+}
+
+.rewardNoticeError {
+  border-color: #fca5a5;
+  color: #991b1b;
+  background: #fef2f2;
+}
+
+.diagnosticResult .rewardNotice {
+  width: 100%;
+  margin: 16px 0;
+  text-align: left;
+}
+
+.rewardActionButton {
+  margin: 0 auto 12px;
+}
+
+.rewardRetryButton {
+  display: block;
+  margin: 0 auto 20px;
+}
+
+.brandLink,
+.backLink {
+  padding: 0;
+  border: 0;
+  color: #fff;
+  background: transparent;
+  cursor: pointer;
+}
+
+.brandLink {
+  font-size: 24px;
+  font-weight: 850;
+}
+
+.backLink {
+  color: #dbeafe;
+  font-weight: 700;
+}
+
+.pathHero {
+  width: min(1120px, calc(100% - 48px));
+  margin: 0 auto;
+  padding: 76px 0 88px;
+}
+
+.routeBadge {
+  display: inline-flex;
+  padding: 7px 12px;
+  align-items: center;
+  border: 1px solid rgba(147, 197, 253, 0.5);
+  border-radius: 999px;
+  color: #bfdbfe;
+  background: rgba(37, 99, 235, 0.2);
+  font-size: 12px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pathHero h1,
+.diagnosticHero h1 {
+  margin: 18px 0 16px;
+  font-size: clamp(42px, 6vw, 68px);
+  line-height: 1.04;
+  letter-spacing: -0.04em;
+}
+
+.pathHero > p {
+  max-width: 760px;
+  color: #dbeafe;
+  font-size: 19px;
+  line-height: 1.65;
+}
+
+.pathSummary {
+  max-width: 720px;
+  margin-top: 42px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  overflow: hidden;
+  border: 1px solid rgba(191, 219, 254, 0.25);
+  border-radius: 14px;
+  background: rgba(7, 20, 38, 0.35);
+}
+
+.pathSummary div {
+  padding: 22px 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  border-right: 1px solid rgba(191, 219, 254, 0.2);
+}
+
+.pathSummary div:last-child { border-right: 0; }
+.pathSummary strong { font-size: 26px; }
+.pathSummary span { color: #bfdbfe; font-size: 13px; }
+
+.pathContent {
+  width: min(1000px, calc(100% - 48px));
+  margin: 0 auto;
+  padding: 78px 0 100px;
+}
+
+.pathHeading { margin-bottom: 34px; }
+.pathHeading p { max-width: 680px; }
+
+.moduleList {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.moduleCard {
+  padding: 22px;
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr) 130px;
+  align-items: center;
+  gap: 20px;
+  border: 1px solid #d8e1ec;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(15, 39, 68, 0.06);
+}
+
+.moduleCardAvailable {
+  border-color: #93b4f8;
+  box-shadow: 0 14px 34px rgba(37, 99, 235, 0.13);
+}
+
+.moduleCardLocked { opacity: 0.74; }
+
+.moduleOrder {
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  color: #2563eb;
+  background: #eaf1ff;
+  font-size: 17px;
+  font-weight: 850;
+}
+
+.moduleCode {
+  color: #2563eb;
+  font-size: 12px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+}
+
+.moduleInformation h3 {
+  margin: 5px 0 7px;
+  color: #102a49;
+  font-size: 20px;
+}
+
+.moduleInformation p {
+  margin: 0;
+  color: #607086;
+  line-height: 1.5;
+}
+
+.moduleButton {
+  min-height: 46px;
+  padding: 0 20px;
+  border: 0;
+  border-radius: 9px;
+  color: #fff;
+  background: #2563eb;
+  cursor: pointer;
+  font-weight: 800;
+  transition: background 150ms ease, transform 150ms ease, box-shadow 150ms ease;
+}
+
+.moduleButton:hover:not(:disabled) {
+  background: #1d4ed8;
+  box-shadow: 0 8px 18px rgba(37, 99, 235, 0.24);
+  transform: translateY(-1px);
+}
+
+.moduleButton:disabled {
+  color: #94a3b8;
+  background: #e2e8f0;
+  cursor: not-allowed;
+}
+
+.moduleLocked {
+  justify-self: end;
+  color: #77869a;
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.pathNavigationLight { color: #102a49; }
+.brandLinkDark, .backLinkDark { color: #102a49; }
+.pathNavigationLight .gamificationAccountStatus { color: #102a49; }
+.pathNavigationLight .gamificationAccountStatus span { color: #526278; }
+
+.diagnosticHero {
+  padding: 72px max(24px, calc((100% - 1000px) / 2)) 64px;
+  color: #fff;
+  background: linear-gradient(135deg, #0f2744, #2563eb);
+}
+
+.diagnosticHero p {
+  max-width: 720px;
+  color: #dbeafe;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.diagnosticPanel {
+  width: min(1000px, calc(100% - 48px));
+  margin: 60px auto;
+  padding: 36px;
+  display: grid;
+  grid-template-columns: 1fr 330px;
+  gap: 50px;
+  border: 1px solid #d8e1ec;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 16px 44px rgba(15, 39, 68, 0.09);
+}
+
+.diagnosticStep,
+.scenarioLabel,
+.questionLabel {
+  color: #2563eb;
+  font-size: 12px;
+  font-weight: 850;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.diagnosticPanel h2 { font-size: 32px; }
+.diagnosticList { padding-left: 20px; color: #526278; line-height: 2; }
+
+.diagnosticSummary {
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  border-radius: 13px;
+  background: #eef4ff;
+}
+
+.diagnosticSummary strong { color: #102a49; font-size: 25px; }
+.diagnosticSummary span { color: #526278; }
+.diagnosticButton { margin-top: 12px; }
+
+/* Diagnóstico interactivo */
+.diagnosticQuestionPage {
+  padding-bottom: 80px;
+  background:
+    radial-gradient(circle at 90% 5%, rgba(96, 165, 250, 0.16), transparent 25%),
+    #f4f7fb;
+}
+
+.diagnosticQuestionShell {
+  width: min(940px, calc(100% - 48px));
+  margin: 34px auto 0;
+}
+
+.questionHeader {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.questionHeader h1 {
+  margin: 8px 0 0;
+  color: #102a49;
+  font-size: clamp(28px, 4vw, 40px);
+  letter-spacing: -0.025em;
+}
+
+.progressValueText {
+  color: #2563eb;
+  font-size: 22px;
+}
+
+.questionProgress {
+  height: 10px;
+  margin: 20px 0 30px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #dce5f0;
+}
+
+.questionProgress > div {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #2563eb, #60a5fa);
+  transition: width 250ms ease;
+}
+
+.questionCard {
+  padding: clamp(26px, 5vw, 46px);
+  border: 1px solid #d8e1ec;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 20px 50px rgba(15, 39, 68, 0.1);
+}
+
+.questionMetadata {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.questionMetadata span {
+  padding: 6px 10px;
+  border-radius: 999px;
+  color: #1e4f91;
+  background: #eaf2ff;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.scenarioBox {
+  margin-top: 24px;
+  padding: 24px 26px;
+  border-left: 5px solid #2563eb;
+  border-radius: 0 14px 14px 0;
+  background: #f1f6ff;
+}
+
+.scenarioBox h2 {
+  margin: 7px 0 10px;
+  color: #102a49;
+  font-size: 23px;
+}
+
+.scenarioBox p {
+  margin: 0;
+  color: #44566d;
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+.questionPrompt {
+  margin: 32px 0 20px;
+}
+
+.questionPrompt h2 {
+  margin: 8px 0 0;
+  color: #0b2442;
+  font-size: clamp(22px, 3vw, 29px);
+  line-height: 1.35;
+}
+
+.answerList {
+  display: grid;
+  gap: 12px;
+}
+
+.answerOption {
+  width: 100%;
+  min-height: 66px;
+  padding: 14px 18px;
+  display: grid;
+  grid-template-columns: 42px 1fr;
+  align-items: center;
+  gap: 15px;
+  border: 1px solid #ccd8e6;
+  border-radius: 12px;
+  color: #243b56;
+  background: #fff;
+  cursor: pointer;
+  text-align: left;
+  font-size: 16px;
+  line-height: 1.45;
+  transition: border 150ms ease, background 150ms ease, transform 150ms ease;
+}
+
+.answerOption:hover {
+  border-color: #7aa5ee;
+  background: #f7faff;
+  transform: translateY(-1px);
+}
+
+.answerLetter {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 9px;
+  color: #1d4ed8;
+  background: #eaf1ff;
+  font-weight: 850;
+}
+
+.answerOptionSelected {
+  border: 2px solid #2563eb;
+  background: #edf4ff;
+  box-shadow: 0 8px 22px rgba(37, 99, 235, 0.13);
+}
+
+.answerOptionSelected .answerLetter {
+  color: #fff;
+  background: #2563eb;
+}
+
+.questionActions {
+  margin-top: 32px;
+  padding-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  border-top: 1px solid #e3eaf2;
+}
+
+.secondaryButton {
+  min-height: 46px;
+  padding: 0 20px;
+  border: 1px solid #bac8d8;
+  border-radius: 9px;
+  color: #29445f;
+  background: #fff;
+  cursor: pointer;
+  font-weight: 750;
+}
+
+.secondaryButton:disabled {
+  color: #a0acb9;
+  background: #f2f5f8;
+  cursor: not-allowed;
+}
+
+.diagnosticResult {
+  width: min(760px, calc(100% - 48px));
+  margin: 55px auto;
+  padding: 48px;
+  border: 1px solid #d8e1ec;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 20px 50px rgba(15, 39, 68, 0.1);
+  text-align: center;
+}
+
+.diagnosticResult .routeBadge {
+  color: #1d4ed8;
+  border-color: #b8cdf7;
+  background: #eaf1ff;
+}
+
+.diagnosticResult h1 {
+  margin: 24px 0 4px;
+  color: #2563eb;
+  font-size: 72px;
+}
+
+.diagnosticResult h2 {
+  margin: 0 0 14px;
+  color: #102a49;
+}
+
+.diagnosticResult > p {
+  color: #526278;
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+.resultMetrics {
+  margin: 30px 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  overflow: hidden;
+  border: 1px solid #dce5f0;
+  border-radius: 14px;
+  background: #f7faff;
+}
+
+.resultMetrics div {
+  padding: 22px 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  border-right: 1px solid #dce5f0;
+}
+
+.resultMetrics div:last-child { border-right: 0; }
+.resultMetrics strong { color: #102a49; font-size: 28px; }
+.resultMetrics span { color: #65758a; font-size: 12px; }
+.resultButton { min-width: 210px; }
+
+@media (max-width: 760px) {
+  .pathNavigation { align-items: flex-start; flex-wrap: wrap; }
+  .backLink { text-align: right; }
+  .gamificationAccount { width: 100%; align-items: flex-start; }
+  .gamificationAccountStatus { width: 100%; align-items: flex-start; }
+  .accountProfile { width: 100%; justify-content: space-between; }
+  .accountProfile > div { align-items: flex-start; }
+  .adminResetControls { align-items: flex-start; }
+  .accountForm { left: 0; right: auto; }
+  .pathSummary { grid-template-columns: 1fr; }
+  .pathSummary div { border-right: 0; border-bottom: 1px solid rgba(191, 219, 254, 0.2); }
+  .moduleCard { grid-template-columns: 52px 1fr; }
+  .moduleButton, .moduleLocked { grid-column: 2; justify-self: stretch; text-align: center; }
+  .diagnosticPanel { grid-template-columns: 1fr; }
+  .questionHeader { align-items: flex-start; }
+  .questionCard { padding: 24px 18px; }
+  .answerOption { grid-template-columns: 38px 1fr; padding: 12px; }
+  .questionActions { flex-direction: column-reverse; }
+  .questionActions button { width: 100%; }
+  .resultMetrics { grid-template-columns: 1fr; }
+  .resultMetrics div { border-right: 0; border-bottom: 1px solid #dce5f0; }
+}

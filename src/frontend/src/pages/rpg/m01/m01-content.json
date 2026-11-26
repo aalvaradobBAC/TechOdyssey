@@ -1,0 +1,337 @@
+{
+  "module": {
+    "id": "M01",
+    "technology": "rpg",
+    "title": "IBM i y Visual Studio Code",
+    "subtitle": "Conoce la plataforma, sus objetos y el entorno moderno de desarrollo antes de escribir RPG.",
+    "version": "1.0.0",
+    "estimatedMinutes": 120,
+    "minimumScore": 80,
+    "prerequisites": [
+      "M00"
+    ],
+    "learningObjectives": [
+      "Diferenciar IBM Power, IBM i y AS/400.",
+      "Reconocer bibliotecas, objetos, archivos fuente y miembros.",
+      "Explicar la relación entre código fuente, compilación y objeto ejecutable.",
+      "Configurar y utilizar Visual Studio Code con Code for IBM i.",
+      "Navegar bibliotecas y miembros mediante Object Browser.",
+      "Ejecutar una compilación guiada y localizar sus diagnósticos."
+    ]
+  },
+  "sections": [
+    {
+      "id": "M01-S01",
+      "order": 1,
+      "title": "Comprender la plataforma IBM i",
+      "estimatedMinutes": 10,
+      "type": "lesson",
+      "introduction": "Antes de programar es necesario distinguir la infraestructura física, el sistema operativo y el nombre histórico de la plataforma.",
+      "topics": [
+        {
+          "title": "IBM Power, IBM i y AS/400",
+          "content": [
+            "IBM Power identifica la familia de servidores y procesadores donde puede ejecutarse IBM i.",
+            "IBM i es el sistema operativo integrado que incluye base de datos, seguridad, gestión de objetos y servicios de ejecución.",
+            "AS/400 es el nombre histórico de una plataforma presentada en 1988. En muchos entornos se sigue utilizando el término para referirse informalmente a IBM i."
+          ]
+        },
+        {
+          "title": "Arquitectura integrada",
+          "content": [
+            "IBM i administra programas, archivos, colas, perfiles y otros recursos como objetos.",
+            "Db2 for i forma parte del sistema y no funciona como una base de datos externa añadida posteriormente.",
+            "Los trabajos o jobs representan unidades de ejecución y mantienen contexto como usuario, lista de bibliotecas y mensajes."
+          ]
+        }
+      ],
+      "knowledgeCheck": {
+        "question": "¿Cuál opción diferencia correctamente los componentes?",
+        "options": [
+          "IBM Power es hardware; IBM i es el sistema operativo; AS/400 es un nombre histórico de la plataforma.",
+          "IBM i es un editor; IBM Power es una base de datos; AS/400 es un lenguaje.",
+          "IBM Power e IBM i son lenguajes de programación y AS/400 es un navegador.",
+          "Los tres términos representan exactamente el mismo producto y versión."
+        ],
+        "correctOption": 0,
+        "explanation": "La separación evita confundir infraestructura, sistema operativo y denominación histórica."
+      }
+    },
+    {
+      "id": "M01-S02",
+      "order": 2,
+      "title": "Bibliotecas y objetos",
+      "estimatedMinutes": 15,
+      "type": "interactive-lesson",
+      "introduction": "IBM i organiza sus recursos mediante objetos. Las bibliotecas permiten agruparlos y localizarlos.",
+      "topics": [
+        {
+          "title": "Tipos de objetos esenciales",
+          "items": [
+            {
+              "code": "*LIB",
+              "name": "Biblioteca",
+              "purpose": "Agrupa y localiza objetos."
+            },
+            {
+              "code": "*FILE",
+              "name": "Archivo",
+              "purpose": "Puede representar datos, dispositivos o archivos fuente."
+            },
+            {
+              "code": "*PGM",
+              "name": "Programa",
+              "purpose": "Objeto ejecutable creado mediante compilación."
+            },
+            {
+              "code": "*MODULE",
+              "name": "Módulo",
+              "purpose": "Unidad compilada que puede enlazarse en programas o programas de servicio."
+            },
+            {
+              "code": "*SRVPGM",
+              "name": "Programa de servicio",
+              "purpose": "Expone procedimientos reutilizables."
+            },
+            {
+              "code": "*CMD",
+              "name": "Comando",
+              "purpose": "Define una interfaz de ejecución de comandos."
+            }
+          ]
+        },
+        {
+          "title": "Lista de bibliotecas",
+          "content": [
+            "La library list define el orden de búsqueda de objetos cuando no se especifica una biblioteca explícita.",
+            "Dos jobs pueden resolver un mismo nombre de objeto de manera diferente si utilizan listas de bibliotecas distintas.",
+            "En laboratorios debe utilizarse una biblioteca asignada y evitar bibliotecas productivas."
+          ]
+        }
+      ],
+      "guidedActivity": {
+        "instruction": "Clasifica cada elemento según su propósito.",
+        "items": [
+          {
+            "prompt": "Contiene objetos de una aplicación",
+            "answer": "*LIB"
+          },
+          {
+            "prompt": "Resultado ejecutable de una compilación",
+            "answer": "*PGM"
+          },
+          {
+            "prompt": "Expone procedimientos reutilizables",
+            "answer": "*SRVPGM"
+          },
+          {
+            "prompt": "Unidad compilada enlazable",
+            "answer": "*MODULE"
+          }
+        ]
+      }
+    },
+    {
+      "id": "M01-S03",
+      "order": 3,
+      "title": "Código fuente, miembros y compilación",
+      "estimatedMinutes": 15,
+      "type": "lesson",
+      "introduction": "El código fuente y el programa ejecutable no son el mismo objeto. El proceso de compilación los relaciona.",
+      "topics": [
+        {
+          "title": "Archivos fuente y miembros",
+          "content": [
+            "QRPGLESRC es un nombre habitual para un archivo fuente que contiene miembros RPGLE.",
+            "Cada miembro puede almacenar el código fuente de un programa, módulo o procedimiento.",
+            "El nombre del miembro puede coincidir con el objeto generado, pero ambos cumplen funciones distintas."
+          ]
+        },
+        {
+          "title": "Flujo de compilación",
+          "steps": [
+            "Editar y guardar el miembro fuente.",
+            "Ejecutar una acción de compilación, por ejemplo CRTBNDRPG.",
+            "Revisar mensajes y diagnósticos del compilador.",
+            "Corregir el fuente cuando existan errores.",
+            "Generar el objeto *PGM cuando la compilación sea válida.",
+            "Ejecutar el programa en un entorno controlado."
+          ]
+        }
+      ],
+      "knowledgeCheck": {
+        "question": "¿Qué ocurre normalmente al compilar correctamente un miembro RPGLE mediante CRTBNDRPG?",
+        "options": [
+          "Se crea un objeto ejecutable de tipo *PGM.",
+          "El miembro fuente se convierte en una biblioteca.",
+          "Se elimina automáticamente el archivo fuente.",
+          "El código queda ejecutándose indefinidamente."
+        ],
+        "correctOption": 0,
+        "explanation": "CRTBNDRPG compila y enlaza el fuente para producir un programa ejecutable."
+      }
+    },
+    {
+      "id": "M01-S04",
+      "order": 4,
+      "title": "Preparar Visual Studio Code",
+      "estimatedMinutes": 20,
+      "type": "guided-lab",
+      "introduction": "Visual Studio Code será el entorno principal de edición. Code for IBM i proporcionará la conexión y navegación remota.",
+      "requirements": [
+        "Visual Studio Code disponible.",
+        "Extensión Code for IBM i instalada.",
+        "Servidor IBM i de entrenamiento autorizado.",
+        "Host, puerto y usuario de laboratorio.",
+        "Biblioteca de trabajo asignada."
+      ],
+      "steps": [
+        {
+          "title": "Instalar la extensión",
+          "description": "Abrir Extensions, buscar Code for IBM i y seleccionar Install."
+        },
+        {
+          "title": "Crear la conexión",
+          "description": "Ejecutar la opción para conectar con IBM i e ingresar únicamente credenciales del entorno de entrenamiento."
+        },
+        {
+          "title": "Validar identidad",
+          "description": "Confirmar usuario, sistema conectado y biblioteca asignada antes de modificar objetos."
+        },
+        {
+          "title": "Abrir Object Browser",
+          "description": "Crear un filtro limitado a la biblioteca de entrenamiento."
+        },
+        {
+          "title": "Localizar el archivo fuente",
+          "description": "Abrir QRPGLESRC o el archivo fuente definido para el curso."
+        }
+      ],
+      "securityNotes": [
+        "No almacenar contraseñas en Git, archivos JSON o capturas de pantalla.",
+        "No conectar el laboratorio con bibliotecas productivas.",
+        "No utilizar usuarios con autoridades especiales para ejercicios."
+      ]
+    },
+    {
+      "id": "M01-S05",
+      "order": 5,
+      "title": "Navegar y editar con Code for IBM i",
+      "estimatedMinutes": 20,
+      "type": "guided-lab",
+      "introduction": "El participante utilizará Object Browser para encontrar y editar un miembro sin depender de PDM o SEU.",
+      "steps": [
+        {
+          "title": "Aplicar un filtro",
+          "description": "Mostrar únicamente la biblioteca y tipos de objeto necesarios."
+        },
+        {
+          "title": "Abrir QRPGLESRC",
+          "description": "Identificar el archivo fuente y listar sus miembros."
+        },
+        {
+          "title": "Abrir el miembro HOLA01",
+          "description": "Revisar el código sin modificar la lógica."
+        },
+        {
+          "title": "Agregar un comentario",
+          "description": "Incluir una línea de comentario que identifique el propósito del ejercicio."
+        },
+        {
+          "title": "Guardar el miembro",
+          "description": "Confirmar que el cambio fue enviado al sistema remoto."
+        }
+      ],
+      "successCriteria": [
+        "La conexión utiliza el entorno correcto.",
+        "El participante localiza la biblioteca sin ayuda.",
+        "El miembro se abre y guarda desde Visual Studio Code.",
+        "No se modifican objetos fuera de la biblioteca asignada."
+      ]
+    },
+    {
+      "id": "M01-S06",
+      "order": 6,
+      "title": "Primera compilación guiada",
+      "estimatedMinutes": 25,
+      "type": "guided-lab",
+      "introduction": "La primera compilación enseña el ciclo fuente, diagnóstico, corrección y objeto ejecutable.",
+      "steps": [
+        {
+          "title": "Seleccionar la acción",
+          "description": "Ejecutar la acción configurada para compilar el miembro con CRTBNDRPG."
+        },
+        {
+          "title": "Revisar la salida",
+          "description": "Identificar si la compilación terminó correctamente y localizar mensajes RNF cuando existan."
+        },
+        {
+          "title": "Confirmar el objeto",
+          "description": "Verificar la creación del objeto *PGM en la biblioteca de entrenamiento."
+        },
+        {
+          "title": "Ejecutar de forma controlada",
+          "description": "Ejecutar el programa mediante la acción autorizada y revisar el resultado."
+        },
+        {
+          "title": "Registrar evidencia",
+          "description": "Documentar miembro, objeto generado, fecha y resultado sin incluir credenciales."
+        }
+      ],
+      "failureScenarios": [
+        {
+          "problem": "No aparece el objeto *PGM",
+          "review": "Mensajes de compilación, biblioteca destino, severidad y autoridad."
+        },
+        {
+          "problem": "Se compiló otra versión",
+          "review": "Biblioteca, miembro seleccionado y lista de bibliotecas."
+        },
+        {
+          "problem": "El programa no ejecuta",
+          "review": "Job log, parámetros requeridos y autoridad sobre objetos dependientes."
+        }
+      ]
+    },
+    {
+      "id": "M01-S07",
+      "order": 7,
+      "title": "Evaluación y misión de cierre",
+      "estimatedMinutes": 15,
+      "type": "assessment",
+      "mission": {
+        "title": "Del fuente al objeto ejecutable",
+        "scenario": "Debes localizar un miembro RPGLE, identificar su propósito, compilarlo y demostrar dónde quedó el objeto ejecutable.",
+        "deliverables": [
+          "Nombre de la biblioteca de entrenamiento.",
+          "Nombre del archivo fuente y miembro.",
+          "Tipo y nombre del objeto generado.",
+          "Resultado de compilación.",
+          "Explicación breve de la diferencia entre fuente y *PGM."
+        ],
+        "scoring": [
+          {
+            "criterion": "Navegación correcta",
+            "weight": 20
+          },
+          {
+            "criterion": "Comprensión de objetos",
+            "weight": 25
+          },
+          {
+            "criterion": "Compilación exitosa",
+            "weight": 30
+          },
+          {
+            "criterion": "Lectura de diagnósticos",
+            "weight": 15
+          },
+          {
+            "criterion": "Seguridad y evidencia",
+            "weight": 10
+          }
+        ]
+      }
+    }
+  ]
+}

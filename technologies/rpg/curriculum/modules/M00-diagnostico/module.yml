@@ -1,0 +1,20 @@
+id: M00
+technology: rpg
+title: "Diagnóstico y ruta personalizada"
+version: 0.1.0
+status: draft
+order: 0
+
+prerequisites: []
+
+estimated_hours:
+  theory: 0
+  demonstrations: 0
+  guided_labs: 0
+  practices: 0
+  challenges: 0
+  assessment: 0.2
+
+completion:
+  diagnostic_required: true
+  score_is_blocking: false

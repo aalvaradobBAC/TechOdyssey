@@ -1,0 +1,82 @@
+{
+  "id": "M01-S05",
+  "title": "Navegar y editar con Code for IBM i",
+  "estimatedMinutes": 25,
+  "objective": "Localizar una biblioteca, abrir un miembro RPGLE, realizar un cambio controlado y comprobar lo que se enviará al sistema remoto.",
+  "scenario": {
+    "title": "Primera modificación controlada",
+    "description": "El equipo solicita documentar el propósito del miembro HOLA01 sin alterar su comportamiento. Debes encontrar el fuente, agregar un comentario, revisar el cambio y guardarlo en la biblioteca de entrenamiento.",
+    "environment": "Biblioteca TRN_USUARIO, archivo QRPGLESRC, miembro HOLA01"
+  },
+  "concepts": [
+    { "term": "Object Browser", "definition": "Vista de Code for IBM i utilizada para filtrar y navegar bibliotecas, objetos y miembros." },
+    { "term": "Source Physical File", "definition": "Archivo físico fuente que contiene miembros; QRPGLESRC es un nombre habitual para fuentes RPGLE." },
+    { "term": "Member", "definition": "Unidad de código fuente almacenada dentro de un archivo fuente." },
+    { "term": "Local change", "definition": "Cambio realizado en el editor antes de guardarlo en el servidor IBM i." }
+  ],
+  "steps": [
+    {
+      "title": "Crear un filtro en Object Browser",
+      "instruction": "Abre la vista IBM i, selecciona Object Browser y crea un filtro limitado a la biblioteca de entrenamiento y al tipo *FILE.",
+      "example": "Library: TRN_USUARIO\nObject: *ALL\nType: *FILE",
+      "expected": "Object Browser muestra únicamente archivos de TRN_USUARIO.",
+      "warning": "No utilices *ALLUSR ni bibliotecas productivas durante el laboratorio."
+    },
+    {
+      "title": "Abrir QRPGLESRC",
+      "instruction": "Expande la biblioteca, localiza el archivo QRPGLESRC y abre la lista de miembros.",
+      "example": "TRN_USUARIO\n└── QRPGLESRC  *FILE\n    ├── HOLA01  RPGLE\n    └── CALCULO RPGLE",
+      "expected": "Se muestran los miembros RPGLE contenidos en QRPGLESRC.",
+      "warning": "Si QRPGLESRC no existe, confirma con el instructor el nombre del archivo fuente asignado."
+    },
+    {
+      "title": "Abrir y comprender HOLA01",
+      "instruction": "Abre HOLA01 en el editor. Identifica la directiva **FREE, las declaraciones y las instrucciones ejecutables.",
+      "example": "**free\nctl-opt dftactgrp(*no);\n\ndcl-s mensaje varchar(50);\nmensaje = 'Hola IBM i';\ndsply mensaje;\n\n*inlr = *on;\nreturn;",
+      "expected": "El miembro aparece en el editor con sintaxis RPGLE y sin modificaciones pendientes.",
+      "warning": "No modifiques instrucciones ejecutables en esta actividad."
+    },
+    {
+      "title": "Agregar un comentario descriptivo",
+      "instruction": "Agrega un comentario debajo de ctl-opt para explicar el propósito del programa.",
+      "example": "**free\nctl-opt dftactgrp(*no);\n\n// Muestra un mensaje de prueba para validar el entorno RPG.\n\ndcl-s mensaje varchar(50);",
+      "expected": "El editor indica que existe un cambio sin guardar y la lógica permanece intacta.",
+      "warning": "El comentario debe empezar con // y no debe incluir usuarios, contraseñas ni datos productivos."
+    },
+    {
+      "title": "Revisar la diferencia antes de guardar",
+      "instruction": "Compara el contenido original con el modificado. Verifica que solo se agregó una línea de comentario.",
+      "example": "  ctl-opt dftactgrp(*no);\n+ // Muestra un mensaje de prueba para validar el entorno RPG.",
+      "expected": "La única diferencia funcionalmente neutra es el comentario agregado.",
+      "warning": "Si aparecen otros cambios, revierte esas líneas antes de continuar."
+    },
+    {
+      "title": "Guardar y verificar el miembro remoto",
+      "instruction": "Guarda con Ctrl+S. Cierra y vuelve a abrir HOLA01 desde Object Browser para confirmar persistencia.",
+      "example": "Ctrl+S → cerrar pestaña → Object Browser → HOLA01",
+      "expected": "El comentario aparece al volver a abrir el miembro y no existen cambios pendientes.",
+      "warning": "Si el guardado falla, revisa conexión, autoridad *CHANGE, bloqueo del miembro y estado del servidor."
+    }
+  ],
+  "challenge": {
+    "title": "Inspección segura de un miembro",
+    "instruction": "Selecciona el comentario correcto que documenta el código sin modificar su comportamiento.",
+    "code": "**free\nctl-opt dftactgrp(*no);\n\ndcl-s contador int(10) inz(0);\n\ncontador += 1;\ndsply ('Ejecución: ' + %char(contador));\n\n*inlr = *on;\nreturn;",
+    "options": [
+      "// Incrementa un contador y muestra el número de ejecución.",
+      "contador = 999; // Cambia el resultado para probar.",
+      "// Usuario: ADMIN; contraseña: DEMO123.",
+      "delete contador; // Elimina la variable."
+    ],
+    "correctOption": 0,
+    "explanation": "La primera opción documenta el comportamiento sin modificar la lógica ni exponer credenciales."
+  },
+  "checklist": [
+    "El filtro apunta únicamente a la biblioteca de entrenamiento.",
+    "Localicé QRPGLESRC y el miembro HOLA01.",
+    "Identifiqué declaraciones e instrucciones ejecutables.",
+    "Agregué únicamente un comentario con //.",
+    "Revisé la diferencia antes de guardar.",
+    "Volví a abrir el miembro y confirmé el cambio remoto."
+  ]
+}

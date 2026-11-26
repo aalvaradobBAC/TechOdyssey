@@ -1,0 +1,55 @@
+.s04Root { color: #102a49; }
+.s04Header span { color: #2563eb; font-size: 12px; font-weight: 850; text-transform: uppercase; }
+.s04Header h2 { margin: 7px 0; font-size: 34px; }
+.s04Header p, .s04Root li { color: #586c82; line-height: 1.65; }
+.s04Section, .s04PathChoice, .s04Security, .s04Checklist { margin-top: 28px; }
+
+.s04PathGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.s04PathGrid button { padding: 22px; display: flex; flex-direction: column; gap: 7px; border: 1px solid #bcd1ed; border-radius: 13px; background: #f7faff; text-align: left; cursor: pointer; }
+.s04PathGrid button:hover { border-color: #2563eb; box-shadow: 0 8px 20px rgba(37, 99, 235, .1); }
+.s04PathGrid strong { font-size: 19px; }
+.s04PathGrid span { color: #2563eb; font-weight: 750; }
+.s04PathGrid small { color: #607389; line-height: 1.5; }
+.s04ChangePath { margin-top: 20px; border: 0; background: transparent; color: #2563eb; cursor: pointer; font-weight: 750; }
+
+.s04InterfaceGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.s04InterfaceGrid article { min-width: 0; padding: 18px; border: 1px solid #d9e3ed; border-radius: 11px; background: #fff; }
+.s04InterfaceGrid article > * { display: block; }
+.s04InterfaceGrid b { font-size: 17px; }
+.s04InterfaceGrid span { margin: 4px 0; color: #2563eb; font-size: 12px; font-weight: 750; }
+.s04InterfaceGrid p { color: #596c81; line-height: 1.5; }
+.s04InterfaceGrid small { padding: 9px; border-radius: 7px; background: #eef4ff; color: #355c88; line-height: 1.45; }
+.s04Requirements { columns: 1; }
+
+.s04StepList { display: flex !important; flex-direction: column !important; gap: 11px; }
+.s04StepList details { width: 100%; border: 1px solid #d5e0eb; border-radius: 11px; background: #fff; overflow: hidden; }
+.s04StepList summary { padding: 15px; display: grid; grid-template-columns: 38px minmax(0, 1fr) auto; align-items: center; gap: 12px; cursor: pointer; list-style: none; }
+.s04StepList summary::-webkit-details-marker { display: none; }
+.s04StepList summary i { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 8px; background: #2563eb; color: #fff; font-style: normal; font-weight: 800; }
+.s04StepList summary strong { min-width: 0; font-size: 16px; }
+.s04StepList summary > span { color: #718096; font-size: 12px; }
+.s04StepBody { padding: 0 18px 18px 65px; }
+.s04StepBody > p { color: #51667d; line-height: 1.6; }
+.s04StepBody aside { margin-top: 9px; padding: 12px; display: flex; flex-direction: column; gap: 4px; border-radius: 8px; line-height: 1.45; }
+.s04Expected { background: #ebf8ef; color: #245e37; }
+.s04Trouble { background: #fff5e5; color: #78561b; }
+
+.s04Security { padding: 22px; border-left: 5px solid #e59b18; border-radius: 0 12px 12px 0; background: #fff8e8; }
+.s04Glossary { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
+.s04Glossary div { min-width: 0; padding: 13px; display: flex; flex-direction: column; gap: 4px; border-radius: 9px; background: #f1f5f9; }
+.s04Glossary span { color: #617286; font-size: 14px; line-height: 1.45; }
+.s04Checklist { padding: 23px; border: 1px solid #bfd3ef; border-radius: 13px; background: #f7faff; }
+.s04Checklist > p { color: #63758a; }
+.s04Checklist label { margin: 11px 0; display: flex; gap: 10px; align-items: flex-start; color: #40566d; line-height: 1.45; }
+.s04Checklist input { margin-top: 3px; }
+.s04Checklist button { margin-top: 15px; min-height: 44px; padding: 0 18px; border: 0; border-radius: 8px; background: #2563eb; color: #fff; font-weight: 800; }
+.s04Checklist button:disabled { background: #dce3eb; color: #8a98a8; }
+
+@media (max-width: 900px) {
+  .s04PathGrid, .s04InterfaceGrid, .s04Glossary { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .s04StepList summary { grid-template-columns: 38px 1fr; }
+  .s04StepList summary > span { display: none; }
+  .s04StepBody { padding-left: 18px; }
+}

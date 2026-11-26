@@ -1,0 +1,18 @@
+id: TECHNOLOGY_ID
+name: TECHNOLOGY_NAME
+display_name: TECHNOLOGY_DISPLAY_NAME
+version: 0.1.0
+status: planned
+
+description: >
+  Descripción de la tecnología.
+
+entry_module: M00
+
+completion:
+  minimum_score: 80
+  capstone_required: true
+
+runtime:
+  type: generic
+  enabled: false

@@ -1,0 +1,21 @@
+id: M15
+technology: rpg
+title: "Lectura de RPG fijo"
+version: 0.1.0
+status: draft
+order: 15
+
+prerequisites: [M14]
+
+estimated_hours:
+  theory: 0
+  demonstrations: 0
+  guided_labs: 0
+  practices: 0
+  challenges: 0
+
+completion:
+  conceptual_score: 80
+  required_labs: 0
+  required_challenges: 0
+  boss_fight: false

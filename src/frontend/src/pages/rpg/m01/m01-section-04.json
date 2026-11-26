@@ -1,0 +1,142 @@
+{
+  "id": "M01-S04",
+  "order": 4,
+  "title": "Preparar Visual Studio Code",
+  "estimatedMinutes": 30,
+  "type": "guided-lab",
+  "introduction": "Esta sección ofrece dos recorridos. La ruta rápida es para quienes ya utilizan Visual Studio Code. La guía detallada explica la interfaz, la instalación de Code for IBM i, la conexión y la validación del entorno.",
+  "experiencePaths": [
+    {
+      "id": "quick",
+      "title": "Ruta rápida",
+      "audience": "Ya utilizo Visual Studio Code",
+      "estimatedMinutes": 10,
+      "description": "Instala Code for IBM i, crea la conexión, abre Object Browser y valida la biblioteca asignada."
+    },
+    {
+      "id": "guided",
+      "title": "Guía para principiantes",
+      "audience": "Es mi primera vez con Visual Studio Code",
+      "estimatedMinutes": 30,
+      "description": "Reconoce la interfaz y completa cada acción con instrucciones, resultados esperados y solución de problemas."
+    }
+  ],
+  "interfaceGuide": [
+    {
+      "name": "Barra de actividades",
+      "location": "Borde izquierdo",
+      "purpose": "Permite abrir Explorer, Search, Source Control, Run and Debug y Extensions.",
+      "action": "Selecciona el icono de bloques para abrir Extensions."
+    },
+    {
+      "name": "Barra lateral",
+      "location": "Panel izquierdo",
+      "purpose": "Muestra el contenido de la herramienta seleccionada.",
+      "action": "Después de instalar Code for IBM i, aquí aparecerán conexiones y Object Browser."
+    },
+    {
+      "name": "Área del editor",
+      "location": "Zona central",
+      "purpose": "Muestra archivos, miembros fuente y configuración.",
+      "action": "Un miembro RPGLE abierto se editará en esta zona."
+    },
+    {
+      "name": "Paleta de comandos",
+      "location": "Ctrl+Shift+P",
+      "purpose": "Permite ejecutar comandos sin buscar opciones en menús.",
+      "action": "Escribe IBM i para localizar acciones de Code for IBM i."
+    },
+    {
+      "name": "Barra de estado",
+      "location": "Borde inferior",
+      "purpose": "Muestra conexión, lenguaje, errores y estado del editor.",
+      "action": "Confirma el sistema IBM i conectado antes de modificar objetos."
+    }
+  ],
+  "requirements": [
+    "Visual Studio Code abierto.",
+    "Acceso autorizado a un IBM i de entrenamiento.",
+    "Host o nombre DNS, puerto SSH, usuario y método de autenticación.",
+    "Biblioteca de trabajo asignada.",
+    "Permiso para instalar la extensión Code for IBM i."
+  ],
+  "steps": [
+    {
+      "title": "Abrir Extensions",
+      "description": "Selecciona el icono de extensiones en la barra de actividades o presiona Ctrl+Shift+X.",
+      "expectedResult": "Se muestra el panel Extensions con un cuadro de búsqueda.",
+      "troubleshooting": "Si no aparece, abre View > Extensions."
+    },
+    {
+      "title": "Instalar Code for IBM i",
+      "description": "Busca Code for IBM i, verifica que sea la extensión correcta y selecciona Install.",
+      "expectedResult": "El botón cambia a Disable o Uninstall y aparece el acceso de IBM i.",
+      "troubleshooting": "Si Install está bloqueado, solicita la extensión mediante el catálogo corporativo."
+    },
+    {
+      "title": "Abrir la paleta de comandos",
+      "description": "Presiona Ctrl+Shift+P, escribe IBM i y selecciona la opción para crear o administrar conexiones.",
+      "expectedResult": "Se presenta el formulario de conexión de Code for IBM i.",
+      "troubleshooting": "Si no aparecen comandos IBM i, recarga Visual Studio Code y confirma que la extensión esté habilitada."
+    },
+    {
+      "title": "Crear la conexión",
+      "description": "Ingresa un nombre descriptivo, host, puerto SSH y usuario del laboratorio. Utiliza únicamente credenciales autorizadas.",
+      "expectedResult": "La conexión aparece en la lista y Visual Studio Code solicita autenticación si corresponde.",
+      "troubleshooting": "Un timeout suele indicar host, VPN, firewall o puerto incorrecto. Authentication failed indica usuario, clave o método de autenticación inválido."
+    },
+    {
+      "title": "Validar el sistema conectado",
+      "description": "Confirma el nombre del sistema, usuario y estado de conexión en la barra de estado antes de continuar.",
+      "expectedResult": "El sistema de entrenamiento se muestra como conectado.",
+      "troubleshooting": "Si el nombre no corresponde al ambiente autorizado, desconecta inmediatamente."
+    },
+    {
+      "title": "Abrir Object Browser",
+      "description": "Desde el panel IBM i abre Object Browser y crea un filtro para la biblioteca de entrenamiento.",
+      "expectedResult": "Se visualiza la biblioteca asignada y sus objetos, sin incluir bibliotecas productivas.",
+      "troubleshooting": "Si no aparecen objetos, revisa el nombre de la biblioteca, filtros y autoridades del usuario."
+    },
+    {
+      "title": "Localizar el archivo fuente",
+      "description": "Expande la biblioteca, abre QRPGLESRC o el archivo definido por el instructor y localiza un miembro RPGLE.",
+      "expectedResult": "El miembro se abre en el editor y la extensión identifica el tipo de fuente.",
+      "troubleshooting": "Si QRPGLESRC no existe, valida el nombre del archivo fuente indicado para el laboratorio."
+    }
+  ],
+  "securityNotes": [
+    "No almacenes contraseñas, claves privadas ni tokens en Git.",
+    "Confirma siempre ambiente, usuario y biblioteca antes de editar.",
+    "No conectes el laboratorio con bibliotecas productivas.",
+    "No utilices perfiles con autoridades especiales para ejercicios."
+  ],
+  "completionChecklist": [
+    "Identifiqué barra de actividades, barra lateral, editor, paleta de comandos y barra de estado.",
+    "Code for IBM i está instalado y habilitado.",
+    "La conexión apunta al IBM i de entrenamiento.",
+    "Object Browser muestra únicamente la biblioteca asignada.",
+    "Puedo abrir un miembro fuente sin modificar objetos ajenos."
+  ],
+  "glossary": [
+    {
+      "term": "Extension",
+      "definition": "Complemento que agrega capacidades a Visual Studio Code."
+    },
+    {
+      "term": "Command Palette",
+      "definition": "Buscador de comandos accesible con Ctrl+Shift+P."
+    },
+    {
+      "term": "Object Browser",
+      "definition": "Vista de Code for IBM i para navegar bibliotecas y objetos."
+    },
+    {
+      "term": "SSH",
+      "definition": "Protocolo utilizado para establecer una conexión remota segura."
+    },
+    {
+      "term": "Workspace",
+      "definition": "Carpeta o conjunto de carpetas abiertas en Visual Studio Code."
+    }
+  ]
+}

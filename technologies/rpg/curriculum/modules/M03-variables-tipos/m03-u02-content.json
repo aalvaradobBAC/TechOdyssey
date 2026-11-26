@@ -1,0 +1,199 @@
+{
+  "module": {
+    "id": "M03",
+    "technology": "rpg",
+    "title": "Variables, constantes y tipos",
+    "subtitle": "Unidad 2: Identidad textual.",
+    "version": "1.0.0",
+    "estimatedMinutes": 20,
+    "minimumScore": 80,
+    "completionBadge": "Guardián de Tipos",
+    "mission": {
+      "title": "El Guardián de los Datos",
+      "scenario": "El contrato de datos necesita distinguir texto de longitud fija, texto variable e identificadores cuya representación debe conservarse."
+    }
+  },
+  "sections": [
+    {
+      "id": "M03-U02",
+      "order": 2,
+      "title": "Identidad textual",
+      "estimatedMinutes": 20,
+      "type": "mission-unit",
+      "introduction": "En esta unidad elegirás entre CHAR y VARCHAR según el contrato del dato. También aprenderás por qué un valor formado por dígitos puede ser texto cuando identifica algo y sus ceros iniciales importan.",
+      "topics": [
+        {
+          "title": "CHAR para texto de longitud fija",
+          "content": [
+            "CHAR(length) declara un campo de carácter con una longitud fija. Es apropiado cuando el contrato del dato establece un ancho fijo, por ejemplo un código de país de dos caracteres.",
+            "El número entre paréntesis es la longitud declarada del campo. No lo elijas por adivinanza: usa el contrato conocido del dato y confirma límites concretos con la documentación del compilador objetivo.",
+            "TechOdyssey usa códigos de ejemplo para aprender. Esta elección es una recomendación de modelado, no una regla que obligue a que todo código del mundo use CHAR."
+          ],
+          "codeCaption": "Código de país de longitud fija",
+          "code": "dcl-s codigoPais char(2);"
+        },
+        {
+          "title": "VARCHAR para texto de longitud variable",
+          "content": [
+            "VARCHAR(maximum-length) declara texto cuya longitud real puede variar, hasta el máximo indicado. El parámetro mostrado en esta unidad es la capacidad máxima declarada.",
+            "Para nombres y descripciones que pueden tener distinta cantidad de caracteres, VARCHAR evita tratarlos como valores numéricos y expresa que la longitud del texto es variable.",
+            "No confundas longitud máxima con el número de caracteres que contiene actualmente un valor."
+          ],
+          "codeCaption": "Nombre con longitud variable y máximo de 60 caracteres",
+          "code": "dcl-s nombreCliente varchar(60);"
+        },
+        {
+          "title": "Un identificador puede parecer número sin serlo",
+          "content": [
+            "Un número de cuenta, código postal o número de empleado puede estar compuesto por dígitos y seguir siendo un identificador de texto.",
+            "Pregunta si el dato participa en cálculos. Si solo sirve para identificar y los ceros iniciales forman parte de su representación, modelarlo como número puede perder información importante.",
+            "Para un identificador de cuenta de ancho conocido, CHAR(12) conserva una representación textual de doce caracteres. La longitud concreta depende del contrato del ejercicio."
+          ],
+          "codeCaption": "Cuenta textual: los ceros iniciales son parte de la identificación",
+          "code": "dcl-s numeroCuenta char(12);"
+        },
+        {
+          "title": "Decisión rápida",
+          "items": [
+            {
+              "code": "CHAR(length)",
+              "name": "Texto fijo",
+              "purpose": "Úsalo cuando el contrato define una longitud fija, como el código de país de dos caracteres del ejercicio."
+            },
+            {
+              "code": "VARCHAR(maximum-length)",
+              "name": "Texto variable",
+              "purpose": "Úsalo cuando el contenido puede tener distintas longitudes dentro del máximo declarado."
+            },
+            {
+              "code": "Identificador",
+              "name": "El significado decide",
+              "purpose": "Si no se calcula y deben conservarse ceros u otros caracteres, no lo conviertas automáticamente a número."
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "title": "Lee el contrato",
+          "description": "Identifica si el dato tiene longitud fija o variable y si se usará para calcular o para identificar."
+        },
+        {
+          "title": "Elige el tipo",
+          "description": "Selecciona CHAR para el código fijo del ejercicio o VARCHAR para el texto de longitud variable."
+        },
+        {
+          "title": "Comprueba la representación",
+          "description": "Verifica que un identificador con ceros iniciales siga siendo textual y conserve su longitud acordada."
+        }
+      ],
+      "challenge": {
+        "title": "Desafío: tres contratos, tres declaraciones",
+        "instruction": "Resuelve cada caso por separado. Escribe una declaración completa para el código fijo, otra para la cuenta que puede empezar con cero y otra para el nombre de longitud variable. Cada línea debe comenzar con DCL-S y terminar con punto y coma.",
+        "deliverables": [
+          "Declarar codigoPais con longitud fija de dos caracteres.",
+          "Declarar numeroCuenta como identificador textual de doce caracteres.",
+          "Declarar nombreCliente con texto variable y máximo de sesenta caracteres."
+        ],
+        "successCriteria": [
+          "Elegí CHAR(2) para el código fijo del ejercicio.",
+          "Conservé la cuenta de doce caracteres como texto.",
+          "Elegí VARCHAR(60) para el nombre de longitud variable."
+        ],
+        "freeText": {
+          "prompt": "Cada campo tiene un caso propio. Elige el tipo a partir de la pista y escribe la declaración RPG completa en cada entrada.",
+          "lines": [
+            {
+              "prompt": "Código de país: siempre tiene dos caracteres",
+              "originalText": "dcl-s codigoPais varchar(2);",
+              "placeholder": "Declara codigoPais con texto fijo de dos caracteres",
+              "requiredPattern": "dcl-s codigoPais char(2);",
+              "forbiddenPatterns": [
+                "dcl-s codigoPais varchar(2);"
+              ]
+            },
+            {
+              "prompt": "Número de cuenta: doce dígitos, puede iniciar con cero y no se calcula",
+              "originalText": "dcl-s numeroCuenta packed(12:0);",
+              "placeholder": "Declara numeroCuenta como identificador textual de doce caracteres",
+              "requiredPattern": "dcl-s numeroCuenta char(12);",
+              "forbiddenPatterns": [
+                "dcl-s numeroCuenta packed(12:0);",
+                "dcl-s numeroCuenta int(10);"
+              ]
+            },
+            {
+              "prompt": "Nombre de cliente: texto cuya longitud varía, hasta sesenta caracteres",
+              "originalText": "dcl-s nombreCliente char(5);",
+              "placeholder": "Declara nombreCliente como texto de longitud variable",
+              "requiredPattern": "dcl-s nombreCliente varchar(60);",
+              "forbiddenPatterns": [
+                "dcl-s nombreCliente char(5);"
+              ]
+            }
+          ]
+        },
+        "solution": {
+          "caption": "Solución de referencia: cada tipo refleja el contrato del dato",
+          "code": "dcl-s codigoPais char(2);\ndcl-s numeroCuenta char(12);\ndcl-s nombreCliente varchar(60);"
+        }
+      },
+      "knowledgeCheck": {
+        "questions": [
+          {
+            "question": "Una cuenta tiene doce dígitos, puede comenzar con cero y nunca participa en cálculos. ¿Qué decisión conserva mejor su representación?",
+            "options": [
+              "Declararla como texto de longitud fija con CHAR(12).",
+              "Declararla como entero porque todos sus caracteres son dígitos.",
+              "Declararla como PACKED(12:0) para facilitar su suma.",
+              "Declararla como indicador IND."
+            ],
+            "correctOption": 0,
+            "explanation": "El dato identifica una cuenta, no una cantidad para calcular. CHAR(12) conserva la representación textual y los ceros iniciales del contrato.",
+            "hint": "Decide por el significado y uso del dato, no solo por la apariencia de sus caracteres.",
+            "code": "dcl-s numeroCuenta char(12);"
+          },
+          {
+            "question": "¿Cuándo conviene elegir CHAR(length) para un dato de texto?",
+            "options": [
+              "Cuando el contrato define una longitud fija.",
+              "Cuando el dato debe utilizarse siempre en una suma.",
+              "Cuando la longitud real cambia y no existe máximo.",
+              "Solo cuando el valor contiene letras."
+            ],
+            "correctOption": 0,
+            "explanation": "CHAR declara texto de longitud fija. La elección debe seguir el contrato del dato.",
+            "hint": "Piensa en el ejemplo del código de país con dos caracteres.",
+            "code": "dcl-s codigoPais char(2);"
+          },
+          {
+            "question": "¿Qué indica el número en VARCHAR(60) en los ejemplos de esta unidad?",
+            "options": [
+              "El máximo de caracteres declarado para el campo.",
+              "La cantidad exacta de caracteres que contiene ahora.",
+              "El número de variables del programa.",
+              "La cantidad de decimales."
+            ],
+            "correctOption": 0,
+            "explanation": "VARCHAR(60) establece el máximo declarado. La longitud real del texto puede variar.",
+            "hint": "Distingue la capacidad declarada del contenido actual.",
+            "code": "dcl-s nombreCliente varchar(60);"
+          },
+          {
+            "question": "Un nombre puede tener distintas longitudes dentro de un máximo de sesenta caracteres. ¿Qué tipo representa mejor este contrato?",
+            "options": [
+              "VARCHAR(60)",
+              "CHAR(1)",
+              "INT(10)",
+              "IND"
+            ],
+            "correctOption": 0,
+            "explanation": "VARCHAR(60) representa texto variable con un máximo declarado de sesenta caracteres.",
+            "hint": "El dato es texto y su longitud real puede cambiar.",
+            "code": "dcl-s nombreCliente varchar(60);"
+          }
+        ]
+      }
+    }
+  ]
+}

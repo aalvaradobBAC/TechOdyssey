@@ -1,0 +1,427 @@
+{
+  "module": {
+    "id": "M02",
+    "technology": "rpg",
+    "title": "Anatomía de un programa Free RPG",
+    "subtitle": "Misión Explorador de Código: descubre la estructura de un programa RPG desde Visual Studio Code.",
+    "version": "1.0.0",
+    "estimatedMinutes": 190,
+    "minimumScore": 80,
+    "prerequisites": [
+      "M01"
+    ],
+    "learningObjectives": [
+      "Reconocer el formato totalmente libre, sus comentarios y reglas básicas de sintaxis en VS Code.",
+      "Identificar las secciones de control, archivos, datos y flujo principal de un fuente RPG.",
+      "Seguir una secuencia breve de DSPLY hasta el final del programa.",
+      "Distinguir el fuente RPG del objeto *PGM y describir el ciclo de edición, compilación y ejecución."
+    ],
+    "completionBadge": "Arquitecto de Sintaxis Libre",
+    "mission": {
+      "title": "Explorador de Código",
+      "scenario": "Abre un fuente RPG en VS Code, reconoce sus bloques y repara un programa de prueba. Puedes completar las prácticas visuales en un archivo local; una conexión a IBM i solo es necesaria para compilar y ejecutar de verdad."
+    },
+    "assessment": {
+      "title": "Evaluación final: informe del Explorador",
+      "introduction": "Responde las cinco preguntas al terminar las cuatro unidades. Se requiere al menos 80%; puedes revisar la retroalimentación y volver a intentarlo sin penalización.",
+      "questions": [
+        {
+          "question": "¿Cuál es la ubicación correcta de **FREE?",
+          "options": [
+            "Columna 1 de la primera línea, sin texto antes.",
+            "Columna 1 de la segunda línea, después de un comentario.",
+            "Al final del fuente, después de RETURN.",
+            "En cualquier columna, siempre que se cierre con /END-FREE."
+          ],
+          "correctOption": 0,
+          "explanation": "**FREE debe iniciar el fuente en la primera columna de la primera línea.",
+          "hint": "Revisa tanto el número de línea como la columna inicial."
+        },
+        {
+          "question": "¿Qué afirmación describe correctamente una sentencia RPG Free?",
+          "options": [
+            "Las instrucciones terminan con punto y coma y pueden incluir comentarios.",
+            "Toda instrucción debe escribirse en una columna fija como RPG posicional.",
+            "Los comentarios se ejecutan antes de CTL-OPT.",
+            "Las sentencias RPG Free nunca usan terminadores."
+          ],
+          "correctOption": 0,
+          "explanation": "En el formato totalmente libre, las sentencias se escriben en forma libre y terminan con punto y coma.",
+          "hint": "Observa el final de una instrucción RPG Free."
+        },
+        {
+          "question": "¿Qué representa CTL-OPT?",
+          "options": [
+            "Una opción de control del fuente, no una operación del flujo ejecutable.",
+            "Un archivo de base de datos que siempre se abre.",
+            "El mensaje que DSPLY muestra al usuario.",
+            "El objeto ejecutable que crea CRTBNDRPG."
+          ],
+          "correctOption": 0,
+          "explanation": "CTL-OPT especifica opciones de control del fuente; no se ejecuta como una operación del flujo principal.",
+          "hint": "Distingue configuración del fuente de una instrucción como DSPLY."
+        },
+        {
+          "question": "¿Qué hace *INLR = *ON en el ejemplo introductorio?",
+          "options": [
+            "Activa el indicador Last Record para señalar el final del programa.",
+            "Muestra el mensaje de DSPLY en la consola.",
+            "Compila el fuente y crea un objeto *PGM.",
+            "Declara una variable local."
+          ],
+          "correctOption": 0,
+          "explanation": "*INLR es el indicador Last Record; puede usarse para señalar que el programa sin archivo primario debe terminar.",
+          "hint": "No lo confundas con RETURN, que devuelve el control desde el procedimiento."
+        },
+        {
+          "question": "¿Qué diferencia a un fuente RPG de un objeto *PGM?",
+          "options": [
+            "El fuente es editable; *PGM es el objeto ejecutable producido por la compilación.",
+            "El fuente ya es el programa ejecutable y no necesita compilarse.",
+            "*PGM es el archivo de texto que se edita en VS Code.",
+            "No existe diferencia: ambos son miembros fuente."
+          ],
+          "correctOption": 0,
+          "explanation": "El código editable es el fuente. La compilación genera un objeto de programa *PGM que IBM i puede ejecutar.",
+          "hint": "Piensa qué archivo escribes y qué artefacto produce el compilador."
+        }
+      ]
+    }
+  },
+  "sections": [
+    {
+      "id": "M02-U01",
+      "order": 1,
+      "title": "El lienzo moderno: **FREE y VS Code",
+      "estimatedMinutes": 45,
+      "type": "mission-unit",
+      "introduction": "Como Explorador de Código, empieza en un entorno familiar: abre un archivo RPGLE en VS Code y reconoce cómo el formato totalmente libre se diferencia del RPG posicional.",
+      "topics": [
+        {
+          "title": "Del formato posicional al lienzo libre",
+          "content": [
+            "En el RPG posicional, la ubicación de cada parte de una línea tenía significado y había columnas estrictas. El formato totalmente libre permite escribir las sentencias de manera más parecida a otros lenguajes modernos.",
+            "**FREE indica al compilador que el miembro usa formato totalmente libre. Debe estar pegado al margen izquierdo, en la columna 1 de la primera línea; no puede haber un comentario o espacio antes.",
+            "Usa // para un comentario de una línea y /* ... */ para un bloque de comentario. Los comentarios explican el fuente y no son instrucciones ejecutables.",
+            "Las sentencias RPG Free terminan con punto y coma. La regla de la columna 1 es especial para **FREE; el resto del código puede indentarse para facilitar la lectura."
+          ]
+        },
+        {
+          "title": "Ejemplo trabajado: crear HOLA.RPGLE",
+          "content": [
+            "Guarda este texto como HOLA.RPGLE. Comprueba que **FREE es el primer contenido del archivo y que el comentario está cerrado. El resaltado de VS Code ayuda a leer el fuente, pero no sustituye al compilador."
+          ],
+          "codeCaption": "Archivo local con la directiva y el comentario de bloque",
+          "code": "**FREE\n/* Programa: HOLA\n   Autor: Tu nombre\n   Fecha: AAAA-MM-DD\n   Propósito: practicar el inicio de un fuente Free RPG\n*/"
+        }
+      ],
+      "steps": [
+        {
+          "title": "Crea tu archivo local",
+          "description": "En VS Code, crea HOLA.RPGLE. Puedes trabajar sin conectarte a IBM i; Code for IBM i ofrece funciones adicionales cuando se configura una conexión autorizada."
+        },
+        {
+          "title": "Escribe el encabezado",
+          "description": "Pon **FREE en la primera línea y columna 1; agrega un bloque de comentarios con tu nombre, fecha y propósito."
+        },
+        {
+          "title": "Comprueba el lienzo",
+          "description": "Observa el resaltado de sintaxis y revisa visualmente que no haya espacio antes de **FREE. Un color correcto no confirma por sí solo que el fuente compile."
+        }
+      ],
+      "challenge": {
+        "title": "Desafío 1B: Tu Primer Lienzo",
+        "instruction": "Crea HOLA.RPGLE en VS Code, escribe **FREE en la posición exacta y añade un comentario de bloque con tu nombre, fecha y propósito. Si no tienes IBM i, completa la validación visual local.",
+        "deliverables": [
+          "Un archivo HOLA.RPGLE con **FREE en línea 1, columna 1.",
+          "Un comentario de bloque con nombre, fecha y propósito.",
+          "Una comprobación visual del resaltado de sintaxis en VS Code."
+        ],
+        "successCriteria": [
+          "Veo **FREE pegado al margen izquierdo en la línea 1.",
+          "Mi bloque de comentario contiene nombre, fecha y propósito.",
+          "Revisé el resaltado, sin confundirlo con una compilación real."
+        ],
+        "solution": {
+          "caption": "Solución de referencia para comparar manualmente",
+          "code": "**FREE\n/* Programa: HOLA\n   Autor: Tu nombre\n   Fecha: AAAA-MM-DD\n   Propósito: practicar el inicio de un fuente Free RPG\n*/"
+        }
+      },
+      "knowledgeCheck": {
+        "question": "Desafío 1A: El Ojo del Compilador. ¿Cuál fragmento ubica correctamente el formato libre?",
+        "options": [
+          "Línea 1 = **FREE; línea 2 = // Programa HOLA",
+          "Línea 1 = // Programa HOLA; línea 2 = **FREE",
+          "Línea 1 empieza con un espacio y luego **FREE"
+        ],
+        "correctOption": 0,
+        "explanation": "**FREE debe aparecer en la columna 1 de la primera línea. Un comentario o espacio anterior hace que deje de estar en esa posición.",
+        "hint": "El fragmento correcto no tiene nada antes de **FREE, ni en esa línea ni en una línea anterior."
+      }
+    },
+    {
+      "id": "M02-U02",
+      "order": 2,
+      "title": "El ADN del programa: secciones principales",
+      "estimatedMinutes": 50,
+      "type": "mission-unit",
+      "introduction": "Ordena los bloques que forman un fuente RPG y construye una carcasa mínima. Aquí reconocerás las declaraciones de archivos y datos sin aprender todavía a procesarlos.",
+      "topics": [
+        {
+          "title": "Las secciones del fuente, de arriba hacia abajo",
+          "content": [
+            "Lee el fuente como un mapa: **FREE marca el formato; CTL-OPT declara opciones de control; DCL-F presenta archivos; DCL-S, DCL-C y DCL-DS introducen declaraciones de datos; después aparecen las instrucciones del flujo principal.",
+            "CTL-OPT DFTACTGRP(*NO); es una opción de control, no una operación de negocio. DFTACTGRP afecta el grupo de activación en que corre el programa; en este módulo basta reconocer dónde se declara.",
+            "DCL-F MIARCHIVO; muestra la forma básica de una declaración de archivo. Un programa que realmente use esa declaración necesita un archivo disponible en el entorno de compilación.",
+            "DCL-S, DCL-C y DCL-DS son familias de declaraciones. En M02 se reconocen como parte del esqueleto; el diseño y uso de datos se desarrollará en otro módulo.",
+            "Al final del flujo principal, *INLR = *ON; activa el indicador Last Record. En un programa sin archivo primario, puede usarse para señalar el final del programa. RETURN; devuelve el control desde el procedimiento principal."
+          ],
+          "items": [
+            {
+              "code": "CTL-OPT",
+              "name": "Opciones de control",
+              "purpose": "Configura opciones del fuente, por ejemplo DFTACTGRP(*NO); no es una instrucción ejecutada."
+            },
+            {
+              "code": "DCL-F",
+              "name": "Declaración de archivo",
+              "purpose": "Nombra un archivo externo que el programa usará; su disponibilidad depende del entorno IBM i."
+            },
+            {
+              "code": "DCL-S / DCL-C / DCL-DS",
+              "name": "Declaraciones de datos",
+              "purpose": "Presentan variables, constantes y estructuras como vocabulario; no se enseñan sus detalles en M02."
+            },
+            {
+              "code": "*INLR / RETURN",
+              "name": "Final del flujo principal",
+              "purpose": "Señala el final del programa y devuelve el control; no son declaraciones de datos."
+            }
+          ]
+        },
+        {
+          "title": "Ejemplo trabajado: una carcasa mínima",
+          "content": [
+            "El ejemplo es un esqueleto compilable sin archivos externos ni datos declarados. Los encabezados de archivos y datos son comentarios: sirven para ubicar secciones sin introducir dependencias que todavía no existen.",
+            "El orden de lectura recomendado es formato, opciones de control, declaraciones (si se necesitan) y flujo ejecutable. La última parte activa *INLR y devuelve el control."
+          ],
+          "codeCaption": "Carcasa mínima sin dependencias externas",
+          "code": "**FREE\nCTL-OPT DFTACTGRP(*NO);\n\n// Archivos\n// DCL-F MIARCHIVO; requiere que el archivo exista\n\n// Datos\n// DCL-S se estudiara en el modulo de datos\n\n*INLR = *ON;\nRETURN;"
+        }
+      ],
+      "steps": [
+        {
+          "title": "Ordena los bloques",
+          "description": "En una lista, ordena formato, CTL-OPT, declaraciones DCL-F, declaraciones de datos y flujo principal con su cierre."
+        },
+        {
+          "title": "Distingue las secciones",
+          "description": "Etiqueta cada línea del ejemplo como opción de control, comentario de archivo/datos o instrucción del final del flujo."
+        },
+        {
+          "title": "Arma la carcasa en VS Code",
+          "description": "Crea un fuente con **FREE, CTL-OPT DFTACTGRP(*NO), comentarios separadores para archivos y datos, *INLR = *ON; y RETURN;. No agregues DCL-F real si no tienes el archivo."
+        }
+      ],
+      "challenge": {
+        "title": "Desafío 2B: Construyendo la Carcasa",
+        "instruction": "En VS Code, construye un programa mínimo con las secciones en orden. Usa comentarios como separadores de archivos y datos para que el ejemplo no dependa de objetos externos.",
+        "ordering": {
+          "prompt": "Desafío 2A: arrastra los cinco bloques al orden didáctico del fuente. También puedes usar los botones de flecha.",
+          "blocks": [
+            "DCL-S / DCL-C / DCL-DS",
+            "**FREE",
+            "*INLR = *ON; y RETURN;",
+            "DCL-F MIARCHIVO;",
+            "CTL-OPT DFTACTGRP(*NO);"
+          ],
+          "correctOrder": [
+            "**FREE",
+            "CTL-OPT DFTACTGRP(*NO);",
+            "DCL-F MIARCHIVO;",
+            "DCL-S / DCL-C / DCL-DS",
+            "*INLR = *ON; y RETURN;"
+          ]
+        },
+        "deliverables": [
+          "Un fuente que empiece con **FREE y tenga CTL-OPT DFTACTGRP(*NO);.",
+          "Un comentario separador para archivos y otro para datos.",
+          "*INLR = *ON; y RETURN; al final del flujo."
+        ],
+        "successCriteria": [
+          "Ordené formato y CTL-OPT antes de las secciones y del flujo principal.",
+          "Usé comentarios para las secciones sin agregar archivos externos inexistentes.",
+          "Terminé el fuente con *INLR = *ON; y RETURN;."
+        ],
+        "solution": {
+          "caption": "Carcasa de referencia para comparar manualmente",
+          "code": "**FREE\nCTL-OPT DFTACTGRP(*NO);\n\n// Archivos\n// DCL-F MIARCHIVO; requiere que el archivo exista\n\n// Datos\n// DCL-S se estudiara en el modulo de datos\n\n*INLR = *ON;\nRETURN;"
+        }
+      },
+      "knowledgeCheck": {
+        "question": "¿Qué debes tener en cuenta antes de usar una declaración DCL-F real?",
+        "options": [
+          "El archivo externo declarado debe existir y estar disponible al compilar.",
+          "DCL-F crea automáticamente el archivo físico y sus registros.",
+          "DCL-F es una instrucción que se ejecuta después de RETURN.",
+          "DCL-F reemplaza la directiva **FREE."
+        ],
+        "correctOption": 0,
+        "explanation": "DCL-F declara un archivo que el programa usará; no lo crea. Por eso el esqueleto local usa comentarios cuando no existe un entorno con ese archivo.",
+        "hint": "Distingue declarar un recurso externo de crearlo."
+      }
+    },
+    {
+      "id": "M02-U03",
+      "order": 3,
+      "title": "Hablando con la consola: DSPLY y flujo secuencial",
+      "estimatedMinutes": 45,
+      "type": "mission-unit",
+      "introduction": "Añade mensajes cortos a la carcasa y sigue el orden en que se ejecutan. No usarás condiciones ni ciclos: el objetivo es leer una secuencia de arriba hacia abajo.",
+      "topics": [
+        {
+          "title": "DSPLY, literales y palabras clave",
+          "content": [
+            "El flujo secuencial ejecuta las instrucciones en orden hasta que el procedimiento principal devuelve el control. DSPLY presenta un mensaje en el entorno de trabajo de IBM i; el destino depende de si el job es interactivo o por lotes.",
+            "La documentación de IBM limita la información mostrada por DSPLY a 52 bytes. En este módulo los mensajes son cortos; no se asume que cada carácter siempre ocupe un byte.",
+            "Los literales de texto de los ejemplos se escriben entre comillas simples, por ejemplo 'Hola Mundo'. Un texto literal no se escribe con comillas dobles en RPG.",
+            "Las palabras clave de RPG no distinguen mayúsculas de minúsculas: dsply y DSPLY representan la misma palabra. Se recomienda usar mayúsculas en las palabras reservadas para mantener un estilo consistente."
+          ],
+          "codeCaption": "Dos mensajes antes del final del programa",
+          "code": "**FREE\nCTL-OPT DFTACTGRP(*NO);\n\nDSPLY 'Iniciando sistema...';\nDSPLY 'Proceso finalizado';\n*INLR = *ON;\nRETURN;"
+        },
+        {
+          "title": "Ejemplo trabajado: leer el orden de ejecución",
+          "content": [
+            "Después de las opciones y comentarios, el primer DSPLY presenta el mensaje inicial; el segundo presenta el cierre del proceso; *INLR y RETURN quedan al final. Cambiar las mayúsculas de DSPLY no cambia la palabra clave."
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "title": "Predice el primer mensaje",
+          "description": "Lee solo las sentencias ejecutables y escribe qué mensaje DSPLY presenta primero."
+        },
+        {
+          "title": "Repara el literal",
+          "description": "En el fragmento del desafío, cambia las comillas dobles del texto por comillas simples y agrega el punto y coma que falta."
+        },
+        {
+          "title": "Añade dos mensajes",
+          "description": "Toma la carcasa de U02 y agrega DSPLY 'Iniciando sistema...'; y DSPLY 'Proceso finalizado'; antes de *INLR = *ON;."
+        }
+      ],
+      "challenge": {
+        "title": "Desafío 3B: El Programa Saluda",
+        "instruction": "Agrega los dos mensajes requeridos a la carcasa de U02, en el orden indicado y antes de *INLR = *ON;. Si no tienes una conexión IBM i, verifica la sintaxis visualmente y compara tu fuente con la solución.",
+        "deliverables": [
+          "Un fuente que presente 'Iniciando sistema...' y luego 'Proceso finalizado'.",
+          "Los dos DSPLY terminados en punto y coma y ubicados antes del cierre."
+        ],
+        "successCriteria": [
+          "Los mensajes aparecen en el orden solicitado.",
+          "Cada DSPLY usa comillas simples y termina con punto y coma.",
+          "Los mensajes aparecen antes de *INLR = *ON; y RETURN;."
+        ],
+        "solution": {
+          "caption": "Programa de referencia para comparar manualmente",
+          "code": "**FREE\nCTL-OPT DFTACTGRP(*NO);\n\nDSPLY 'Iniciando sistema...';\nDSPLY 'Proceso finalizado';\n*INLR = *ON;\nRETURN;"
+        }
+      },
+      "knowledgeCheck": {
+        "question": "Desafío 3A: Cazador de Bugs. ¿Qué dos errores impiden compilar este fragmento?",
+        "code": "**FREE\nCTL-OPT DFTACTGRP(*NO);\nDSPLY \"Bienvenido a RPG\"\n*INLR = *ON;",
+        "options": [
+          "El literal usa comillas dobles y falta el punto y coma después de DSPLY.",
+          "CTL-OPT debe ir después de *INLR y DSPLY no admite texto.",
+          "*INLR debe aparecer antes de **FREE y el mensaje supera 52 bytes.",
+          "Las palabras clave están en mayúsculas y el programa no tiene variables."
+        ],
+        "correctOption": 0,
+        "explanation": "Los literales de texto RPG se delimitan con comillas simples y la sentencia DSPLY debe terminar con punto y coma.",
+        "hint": "Inspecciona el delimitador del texto y el final de la línea DSPLY."
+      }
+    },
+    {
+      "id": "M02-U04",
+      "order": 4,
+      "title": "Ciclo de vida en VS Code: editar, compilar y ejecutar",
+      "estimatedMinutes": 50,
+      "type": "mission-unit",
+      "introduction": "Completa la misión reparando un fuente, distinguiendo lo que escribes de lo que ejecuta IBM i y aprendiendo a leer los diagnósticos sin adivinar.",
+      "topics": [
+        {
+          "title": "Del fuente al objeto ejecutable",
+          "content": [
+            "El archivo que editas en VS Code es texto fuente. En IBM i, CRTBNDRPG puede compilar y enlazar un fuente RPG para crear un objeto ejecutable de tipo *PGM en una biblioteca.",
+            "El editor local puede resaltar sintaxis, pero no produce un *PGM ni confirma que el fuente compile. Para compilar o llamar el programa se necesita una conexión configurada a un IBM i autorizado y un entorno de entrenamiento.",
+            "Los diagnósticos incluyen un identificador y una severidad. Como orientación inicial: 00 es informativo, 10 es advertencia, 20 es error y 30 es error severo. Revisa siempre el texto y el resultado de compilación: la generación del objeto puede depender de la configuración del compilador.",
+            "Cuando Code for IBM i muestra diagnósticos de compilación en Problems, selecciona el mensaje para revisar su ubicación. El resaltado local y los diagnósticos del compilador son ayudas distintas."
+          ],
+          "codeCaption": "Fuente de texto y objeto creado por la compilación",
+          "code": "HOLA.RPGLE  -- CRTBNDRPG -->  HOLA (*PGM)\n\nVS Code edita el fuente       IBM i ejecuta el objeto"
+        },
+        {
+          "title": "Identación y limpieza",
+          "content": [
+            "En formato totalmente libre, los espacios de indentación ayudan a que el fuente se lea con claridad y normalmente no alteran las sentencias. La regla especial sigue siendo **FREE en la primera línea y columna 1.",
+            "Usa una indentación consistente de dos o cuatro espacios. En VS Code, conserva los bloques alineados y revisa que cada sentencia termine con punto y coma."
+          ]
+        },
+        {
+          "title": "Ejercicio: reparar Código Corrupto",
+          "content": [
+            "Este fuente de práctica tiene el comentario antes de **FREE, una opción de control en un lugar incorrecto y errores de delimitación/terminación. Reordénalo, corrige la sintaxis y completa el cierre del programa."
+          ],
+          "codeCaption": "Fuente con errores para reparar",
+          "code": "// Programa de prueba\n**FREE\ndsply \"Hola IBM i\";\nctl-opt dftactgrp(*no);\ndsply 'Adios'\nreturn"
+        }
+      ],
+      "steps": [
+        {
+          "title": "Separa fuente y objeto",
+          "description": "Etiqueta HOLA.RPGLE como fuente editable y HOLA (*PGM) como objeto que IBM i ejecuta tras compilar."
+        },
+        {
+          "title": "Interpreta el diagnóstico",
+          "description": "En un mensaje simulado de Problems como RNF7030 (nombre/indicador no definido) o RNF5347 (se esperaba un punto y coma), identifica la línea y corrige la causa concreta."
+        },
+        {
+          "title": "Limpia el fuente",
+          "description": "Aplica una indentación uniforme, ordena CTL-OPT antes del flujo ejecutable y termina las sentencias RPG con punto y coma."
+        }
+      ],
+      "challenge": {
+        "title": "Desafío 4B: El Desafío del Código Corrupto",
+        "instruction": "Repara el fuente mostrado arriba: coloca **FREE en el lugar correcto, ordena las secciones, corrige las comillas y los terminadores, añade el cierre del programa y alinea el código. Con IBM i configurado, compílalo y ejecuta CALL sobre el objeto de entrenamiento; sin servidor, revisa el checklist y compara la solución.",
+        "deliverables": [
+          "Un fuente corregido y ordenado.",
+          "Una breve nota que diferencie fuente y objeto *PGM.",
+          "Si se dispone de IBM i autorizado: resultado de compilación y ejecución; en modo local: checklist visual completado."
+        ],
+        "successCriteria": [
+          "Puse **FREE en la primera línea y CTL-OPT antes del flujo ejecutable.",
+          "Corregí el literal de texto y los puntos y coma faltantes.",
+          "Añadí *INLR = *ON; y RETURN; como cierre.",
+          "Apliqué indentación consistente y comparé el resultado con la referencia."
+        ],
+        "solution": {
+          "caption": "Versión corregida para comparar manualmente",
+          "code": "**FREE\nCTL-OPT DFTACTGRP(*NO);\n\n// Programa de prueba\nDSPLY 'Hola IBM i';\nDSPLY 'Adios';\n*INLR = *ON;\nRETURN;"
+        }
+      },
+      "knowledgeCheck": {
+        "question": "Desafío 4A: Interpretando al Compilador. ¿Qué debes hacer ante un mensaje de error en Problems?",
+        "options": [
+          "Leer el identificador y el texto, ir a la línea señalada y corregir la causa antes de volver a compilar.",
+          "Cambiar cualquier línea hasta que desaparezca el subrayado, sin leer el mensaje.",
+          "Ignorar el diagnóstico porque el resaltado de sintaxis ya confirmó la compilación.",
+          "Ejecutar CALL aunque la compilación haya fallado."
+        ],
+        "correctOption": 0,
+        "explanation": "El ID, el texto y la ubicación del diagnóstico orientan la corrección. Tras cambiar el fuente, vuelve a compilar; solo ejecuta un objeto generado correctamente.",
+        "hint": "Sigue la evidencia que muestra el compilador y separa edición local de compilación real."
+      }
+    }
+  ]
+}
